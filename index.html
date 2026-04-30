@@ -262,6 +262,11 @@ function addRecord() {
   document.getElementById('f-lock').value = '';
   document.getElementById('f-booking').value = '';
   updatePreview();
+  var ym = date.slice(0, 7);
+  var sel = document.getElementById('sel-month');
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === ym) { sel.selectedIndex = i; break; }
+  }
   renderSummary();
 }
 
