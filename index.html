@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>遞酒樓 薪資記錄</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C9A84C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="薪資記錄">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -334,6 +340,11 @@ fillSelects();
 document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
 renderSummary();
 updatePreview();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
 </script>
 </body>
 </html>
