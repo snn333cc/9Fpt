@@ -314,7 +314,9 @@ function loginAs(name) {
   document.getElementById('hdr-avatar').textContent = initial(name);
   fillSelects();
   switchTab('add');
-  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  var _now = new Date();
+  var _y = _now.getFullYear(), _m = _now.getMonth()+1, _d = _now.getDate();
+  document.getElementById('f-date').value = _y + '-' + (_m<10?'0'+_m:''+_m) + '-' + (_d<10?'0'+_d:''+_d);
   renderSummary();
   updatePreview();
 }
@@ -330,7 +332,10 @@ function getMonths() {
   var now = new Date(), months = [];
   for (var i = 0; i < 6; i++) {
     var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    months.push({ ym: d.toISOString().slice(0,7), label: d.getFullYear() + '年' + (d.getMonth()+1) + '月' });
+    var y = d.getFullYear();
+    var m = d.getMonth() + 1;
+    var ym = y + '-' + (m < 10 ? '0' + m : '' + m);
+    months.push({ ym: ym, label: y + '年' + m + '月' });
   }
   return months;
 }
@@ -342,6 +347,7 @@ function switchTab(t) {
   var tabs = ['add','history','stats'];
   document.querySelectorAll('.tab').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
   document.querySelectorAll('.view').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
+  if (t==='add') renderSummary();
   if (t==='history') renderHistory();
   if (t==='stats') renderStats();
 }
