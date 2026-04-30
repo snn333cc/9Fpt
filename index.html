@@ -38,10 +38,10 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
 .user-arrow { color: var(--text-dim); }
 .del-user-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text-dim); cursor: pointer; font-size: 12px; flex-shrink: 0; }
 .del-user-btn:hover { color: var(--red); border-color: var(--red); }
-.new-user-form { display: flex; gap: 8px; }
-.new-user-form input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; }
+.new-user-form { display: flex; gap: 8px; width: 100%; }
+.new-user-form input { flex: 1; min-width: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; }
 .new-user-form input:focus { border-color: var(--gold); }
-.new-user-form button { background: var(--gold); border: none; border-radius: 8px; padding: 10px 16px; color: #0e0b08; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.new-user-form button { flex-shrink: 0; background: var(--gold); border: none; border-radius: 8px; padding: 10px 14px; color: #0e0b08; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; }
 .no-users { font-size: 12px; color: var(--text-dim); text-align: center; padding: 10px 0; letter-spacing: 1px; }
 
 /* MAIN APP */
