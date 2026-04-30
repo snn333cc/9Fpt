@@ -121,8 +121,21 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
     <div class="login-box">
       <div class="login-box-title">建立新帳號</div>
       <div class="new-user-form">
-        <input type="text" id="new-name" placeholder="輸入你的名字" maxlength="12">
+        <input type="text" id="new-name" placeholder="名字" maxlength="12">
+        <input type="password" id="new-pin" placeholder="4位密碼" maxlength="4" inputmode="numeric" style="flex-shrink:0;width:90px;">
         <button onclick="createUser()">建立</button>
+      </div>
+    </div>
+    <div id="pin-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;">
+      <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;width:280px;text-align:center;">
+        <div style="font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;" id="pin-username"></div>
+        <div style="font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-bottom:18px;">請輸入 4 位密碼</div>
+        <input type="password" id="pin-input" maxlength="4" inputmode="numeric" placeholder="••••" style="width:100%;text-align:center;font-size:24px;letter-spacing:8px;padding:12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:inherit;outline:none;margin-bottom:14px;">
+        <div style="display:flex;gap:8px;">
+          <button onclick="cancelPin()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text-dim);font-family:inherit;cursor:pointer;">取消</button>
+          <button onclick="confirmPin()" style="flex:1;padding:10px;background:var(--gold);border:none;border-radius:8px;color:#0e0b08;font-family:inherit;font-weight:700;cursor:pointer;">確認</button>
+        </div>
+        <div id="pin-err" style="font-size:12px;color:var(--red);margin-top:10px;min-height:16px;"></div>
       </div>
     </div>
   </div>
@@ -211,13 +224,18 @@ var currentUser = null;
 var records = [];
 
 function getUsers() {
-  try { return JSON.parse(localStorage.getItem('djl_users') || '[]'); } catch(e) { return []; }
+  try {
+    var raw = JSON.parse(localStorage.getItem('djl_users') || '[]');
+    // migrate old format (array of strings)
+    return raw.map(function(u){ return typeof u==='string' ? {name:u,pin:''} : u; });
+  } catch(e) { return []; }
 }
 function saveUsers(u) { localStorage.setItem('djl_users', JSON.stringify(u)); }
 function getRecords() {
   if (!currentUser) return [];
   try { return JSON.parse(localStorage.getItem('djl_rec_' + currentUser) || '[]'); } catch(e) { return []; }
 }
+// currentUser is always the name string
 function save() { if (currentUser) localStorage.setItem('djl_rec_' + currentUser, JSON.stringify(records)); }
 function initial(name) { return name ? name.slice(0,1).toUpperCase() : '?'; }
 
@@ -226,32 +244,64 @@ function renderUserList() {
   var el = document.getElementById('user-list');
   if (!users.length) { el.innerHTML = '<div class="no-users">尚無帳號，請在下方建立</div>'; return; }
   el.innerHTML = users.map(function(u) {
+    var n = u.name;
     return '<div class="user-row">' +
-      '<button class="user-btn" onclick="loginAs(\'' + u + '\')">' +
-        '<div class="user-info"><div class="user-avatar">' + initial(u) + '</div><span>' + u + '</span></div>' +
+      '<button class="user-btn" onclick="askPin('' + n + '')">'+
+        '<div class="user-info"><div class="user-avatar">' + initial(n) + '</div><span>' + n + '</span></div>' +
         '<span class="user-arrow">›</span>' +
       '</button>' +
-      '<button class="del-user-btn" onclick="deleteUser(\'' + u + '\')">刪除</button>' +
+      '<button class="del-user-btn" onclick="deleteUser('' + n + '')">刪除</button>' +
     '</div>';
   }).join('');
 }
 
 function createUser() {
   var name = document.getElementById('new-name').value.trim();
-  if (!name) return;
+  var pin = document.getElementById('new-pin').value.trim();
+  if (!name) { alert('請輸入名字'); return; }
+  if (pin.length !== 4 || !/^[0-9]{4}$/.test(pin)) { alert('請輸入4位數字密碼'); return; }
   var users = getUsers();
-  if (users.indexOf(name) !== -1) { alert('這個名字已經存在'); return; }
-  users.push(name);
+  if (users.find(function(u){return u.name===name;})) { alert('這個名字已經存在'); return; }
+  users.push({name:name,pin:pin});
   saveUsers(users);
   document.getElementById('new-name').value = '';
+  document.getElementById('new-pin').value = '';
   renderUserList();
 }
 
 function deleteUser(name) {
   if (!confirm('確定刪除「' + name + '」的帳號與所有記錄？')) return;
-  saveUsers(getUsers().filter(function(u) { return u !== name; }));
+  saveUsers(getUsers().filter(function(u) { return u.name !== name; }));
   localStorage.removeItem('djl_rec_' + name);
   renderUserList();
+}
+
+var pinTarget = null;
+function askPin(name) {
+  pinTarget = name;
+  document.getElementById('pin-username').textContent = name;
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-err').textContent = '';
+  var ov = document.getElementById('pin-overlay');
+  ov.style.display = 'flex';
+  setTimeout(function(){ document.getElementById('pin-input').focus(); }, 100);
+}
+function cancelPin() {
+  document.getElementById('pin-overlay').style.display = 'none';
+  pinTarget = null;
+}
+function confirmPin() {
+  var entered = document.getElementById('pin-input').value;
+  var users = getUsers();
+  var user = users.find(function(u){ return u.name === pinTarget; });
+  if (!user || entered !== user.pin) {
+    document.getElementById('pin-err').textContent = '密碼錯誤，請再試一次';
+    document.getElementById('pin-input').value = '';
+    return;
+  }
+  document.getElementById('pin-overlay').style.display = 'none';
+  loginAs(pinTarget);
+  pinTarget = null;
 }
 
 function loginAs(name) {
