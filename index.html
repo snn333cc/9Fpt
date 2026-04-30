@@ -15,16 +15,45 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --gold: #C9A84C; --gold-dim: #8a6d2e; --bg: #0e0b08;
-  --surface: #1a1510; --surface2: #221c14; --surface3: #2a2018;
+  --surface: #1a1510; --surface2: #221c14;
   --border: rgba(201,168,76,0.2); --border2: rgba(201,168,76,0.4);
-  --text: #f0e8d5; --text-dim: #8a7d65; --red: #c0392b; --green: #2ecc71;
+  --text: #f0e8d5; --text-dim: #8a7d65; --red: #c0392b;
 }
 html, body { min-height: 100vh; background: var(--bg); }
 body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 14px; display: flex; justify-content: center; padding: 20px 12px 40px; }
-.app { width: 100%; max-width: 480px; background: var(--bg); border-radius: 16px; border: 1px solid var(--border2); overflow: hidden; }
-.hdr { background: var(--surface); border-bottom: 1px solid var(--border2); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
-.hdr-title { font-size: 16px; color: var(--gold); letter-spacing: 2px; }
-.hdr-sub { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+.app { width: 100%; max-width: 480px; }
+
+/* LOGIN */
+#screen-login { display: flex; flex-direction: column; align-items: center; padding: 48px 0 0; }
+.login-logo { font-size: 22px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
+.login-sub { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 40px; }
+.login-box { width: 100%; background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 20px; margin-bottom: 14px; }
+.login-box-title { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 14px; }
+.user-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.user-row:last-child { margin-bottom: 0; }
+.user-btn { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text); font-family: inherit; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s; }
+.user-btn:hover { border-color: var(--gold); }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #0e0b08; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.user-arrow { color: var(--text-dim); }
+.del-user-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text-dim); cursor: pointer; font-size: 12px; flex-shrink: 0; }
+.del-user-btn:hover { color: var(--red); border-color: var(--red); }
+.new-user-form { display: flex; gap: 8px; }
+.new-user-form input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; }
+.new-user-form input:focus { border-color: var(--gold); }
+.new-user-form button { background: var(--gold); border: none; border-radius: 8px; padding: 10px 16px; color: #0e0b08; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.no-users { font-size: 12px; color: var(--text-dim); text-align: center; padding: 10px 0; letter-spacing: 1px; }
+
+/* MAIN APP */
+#screen-app { display: none; background: var(--bg); border-radius: 16px; border: 1px solid var(--border2); overflow: hidden; }
+.hdr { background: var(--surface); border-bottom: 1px solid var(--border2); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
+.hdr-left { display: flex; align-items: center; gap: 10px; }
+.hdr-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: #0e0b08; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.hdr-title { font-size: 14px; color: var(--gold); letter-spacing: 1px; }
+.hdr-sub { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+.btn-logout { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; color: var(--text-dim); font-family: inherit; font-size: 11px; cursor: pointer; }
+.btn-logout:hover { color: var(--text); border-color: var(--border2); }
+
 .tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border2); }
 .tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 12px; cursor: pointer; color: var(--text-dim); border: none; background: none; font-family: inherit; letter-spacing: 1px; transition: color 0.2s; }
 .tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
@@ -33,7 +62,6 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
 
 .month-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .month-bar select { flex: 1; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 9px 12px; color: var(--text); font-family: inherit; font-size: 13px; outline: none; appearance: none; cursor: pointer; }
-
 .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
 .sum-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 14px; text-align: center; }
 .sum-card.highlight { border-color: var(--gold); background: var(--surface2); }
@@ -55,8 +83,6 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
 
 .btn-add { width: 100%; padding: 12px; background: var(--gold); color: #0e0b08; border: none; border-radius: 8px; font-size: 14px; font-family: inherit; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: opacity 0.2s; margin-top: 4px; }
 .btn-add:hover { opacity: 0.85; }
-.btn-add:active { opacity: 0.7; }
-
 .msg { text-align: center; font-size: 12px; margin-top: 10px; color: var(--gold); min-height: 18px; letter-spacing: 1px; }
 
 .rec-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
@@ -65,7 +91,7 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
 .rec-total { font-size: 16px; color: var(--gold); font-weight: 700; }
 .rec-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { font-size: 11px; padding: 3px 8px; border-radius: 20px; background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); }
-.btn-del { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 14px; padding: 0 4px; font-family: inherit; transition: color 0.2s; }
+.btn-del { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 14px; padding: 0 4px; font-family: inherit; }
 .btn-del:hover { color: var(--red); }
 .empty { text-align: center; color: var(--text-dim); font-size: 12px; padding: 40px 0; letter-spacing: 1px; }
 
@@ -81,275 +107,278 @@ body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 1
 </head>
 <body>
 <div class="app">
-  <div class="hdr">
-    <div>
-      <div class="hdr-title">遞酒樓 薪資記錄</div>
-      <div class="hdr-sub">個人出勤與業績追蹤</div>
+
+  <!-- LOGIN SCREEN -->
+  <div id="screen-login">
+    <div class="login-logo">遞酒樓 薪資記錄</div>
+    <div class="login-sub">個人出勤與業績追蹤</div>
+
+    <div class="login-box">
+      <div class="login-box-title">選擇帳號</div>
+      <div id="user-list"></div>
     </div>
-    <div style="font-size:11px;color:var(--text-dim);">本地儲存</div>
-  </div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('add')">新增班次</button>
-    <button class="tab" onclick="switchTab('history')">出勤記錄</button>
-    <button class="tab" onclick="switchTab('stats')">當月薪資</button>
-  </div>
-
-  <!-- ADD -->
-  <div class="view active" id="view-add">
-    <div class="month-bar">
-      <select id="sel-month" onchange="renderSummary()"></select>
-    </div>
-    <div class="summary-grid" id="mini-summary"></div>
-
-    <div class="form-section">
-      <div class="sec-title">出勤時間</div>
-      <div class="form-grid three">
-        <div class="fg"><label>日期</label><input type="date" id="f-date"></div>
-        <div class="fg"><label>上班</label><input type="time" id="f-start"></div>
-        <div class="fg"><label>下班</label><input type="time" id="f-end"></div>
+    <div class="login-box">
+      <div class="login-box-title">建立新帳號</div>
+      <div class="new-user-form">
+        <input type="text" id="new-name" placeholder="輸入你的名字" maxlength="12">
+        <button onclick="createUser()">建立</button>
       </div>
     </div>
-
-    <div class="form-section">
-      <div class="sec-title">業績</div>
-      <div class="form-grid">
-        <div class="fg"><label>螢光棒（支）</label><input type="number" id="f-glow" placeholder="0" min="0" oninput="updatePreview()"></div>
-        <div class="fg"><label>鎖台（次）</label><input type="number" id="f-lock" placeholder="0" min="0" oninput="updatePreview()"></div>
-      </div>
-      <div style="margin-top:10px;">
-        <div class="fg"><label>訂位消費金額（元）</label><input type="number" id="f-booking" placeholder="0" min="0" oninput="updatePreview()"></div>
-      </div>
-    </div>
-
-    <div class="form-section">
-      <div class="sec-title">本場試算</div>
-      <div id="preview-rows"></div>
-      <div class="preview-row" style="border-top:1px solid var(--border2);margin-top:6px;padding-top:10px;">
-        <span style="color:var(--text);font-size:13px;font-weight:500;">本場合計</span>
-        <span class="val" id="prev-total" style="font-size:17px;">$0</span>
-      </div>
-    </div>
-
-    <button class="btn-add" onclick="addRecord()">儲存這班</button>
-    <div class="msg" id="msg"></div>
   </div>
 
-  <!-- HISTORY -->
-  <div class="view" id="view-history">
-    <div class="month-bar">
-      <select id="sel-month2" onchange="renderHistory()"></select>
-      <button onclick="clearMonth()" style="background:none;border:none;color:var(--red);font-size:11px;font-family:inherit;cursor:pointer;white-space:nowrap;padding:0 8px;">清除本月</button>
+  <!-- MAIN APP -->
+  <div id="screen-app">
+    <div class="hdr">
+      <div class="hdr-left">
+        <div class="hdr-avatar" id="hdr-avatar"></div>
+        <div>
+          <div class="hdr-title" id="hdr-name"></div>
+          <div class="hdr-sub">遞酒樓 薪資記錄</div>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="logout()">切換帳號</button>
     </div>
-    <div id="records-list"></div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('add')">新增班次</button>
+      <button class="tab" onclick="switchTab('history')">出勤記錄</button>
+      <button class="tab" onclick="switchTab('stats')">當月薪資</button>
+    </div>
+
+    <div class="view active" id="view-add">
+      <div class="month-bar">
+        <select id="sel-month" onchange="renderSummary()"></select>
+      </div>
+      <div class="summary-grid" id="mini-summary"></div>
+
+      <div class="form-section">
+        <div class="sec-title">出勤時間</div>
+        <div class="form-grid three">
+          <div class="fg"><label>日期</label><input type="date" id="f-date"></div>
+          <div class="fg"><label>上班</label><input type="time" id="f-start"></div>
+          <div class="fg"><label>下班</label><input type="time" id="f-end"></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="sec-title">業績</div>
+        <div class="form-grid">
+          <div class="fg"><label>螢光棒（支）</label><input type="number" id="f-glow" placeholder="0" min="0" oninput="updatePreview()"></div>
+          <div class="fg"><label>鎖台（次）</label><input type="number" id="f-lock" placeholder="0" min="0" oninput="updatePreview()"></div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="fg"><label>訂位消費金額（元）</label><input type="number" id="f-booking" placeholder="0" min="0" oninput="updatePreview()"></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="sec-title">本場試算</div>
+        <div id="preview-rows"></div>
+        <div class="preview-row" style="border-top:1px solid var(--border2);margin-top:6px;padding-top:10px;">
+          <span style="color:var(--text);font-size:13px;font-weight:500;">本場合計</span>
+          <span class="val" id="prev-total" style="font-size:17px;">$0</span>
+        </div>
+      </div>
+
+      <button class="btn-add" onclick="addRecord()">儲存這班</button>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <div class="view" id="view-history">
+      <div class="month-bar">
+        <select id="sel-month2" onchange="renderHistory()"></select>
+        <button onclick="clearMonth()" style="background:none;border:none;color:var(--red);font-size:11px;font-family:inherit;cursor:pointer;white-space:nowrap;padding:0 8px;">清除本月</button>
+      </div>
+      <div id="records-list"></div>
+    </div>
+
+    <div class="view" id="view-stats">
+      <div class="month-bar">
+        <select id="sel-month3" onchange="renderStats()"></select>
+      </div>
+      <div class="big-salary">
+        <div class="amount" id="st-total">$0</div>
+        <div class="label">本月薪資總計</div>
+      </div>
+      <div class="breakdown" id="st-breakdown"></div>
+    </div>
   </div>
 
-  <!-- STATS -->
-  <div class="view" id="view-stats">
-    <div class="month-bar">
-      <select id="sel-month3" onchange="renderStats()"></select>
-    </div>
-    <div class="big-salary">
-      <div class="amount" id="st-total">$0</div>
-      <div class="label">本月薪資總計</div>
-    </div>
-    <div class="breakdown" id="st-breakdown"></div>
-  </div>
 </div>
-
 <script>
-let records = [];
-try { records = JSON.parse(localStorage.getItem('djl_salary_v2') || '[]'); } catch(e) {}
-function save() { localStorage.setItem('djl_salary_v2', JSON.stringify(records)); }
+var currentUser = null;
+var records = [];
 
-function getMonths() {
-  const now = new Date();
-  const months = [];
-  for (let i = 0; i < 6; i++) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    const ym = d.toISOString().slice(0, 7);
-    const label = d.getFullYear() + '年' + (d.getMonth() + 1) + '月';
-    months.push({ ym, label });
-  }
-  return months;
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('djl_users') || '[]'); } catch(e) { return []; }
 }
-
-function fillSelects() {
-  const months = getMonths();
-  const html = months.map(m => '<option value="' + m.ym + '">' + m.label + '</option>').join('');
-  ['sel-month', 'sel-month2', 'sel-month3'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.innerHTML = html;
-  });
+function saveUsers(u) { localStorage.setItem('djl_users', JSON.stringify(u)); }
+function getRecords() {
+  if (!currentUser) return [];
+  try { return JSON.parse(localStorage.getItem('djl_rec_' + currentUser) || '[]'); } catch(e) { return []; }
 }
+function save() { if (currentUser) localStorage.setItem('djl_rec_' + currentUser, JSON.stringify(records)); }
+function initial(name) { return name ? name.slice(0,1).toUpperCase() : '?'; }
 
-function switchTab(t) {
-  var tabs = ['add', 'history', 'stats'];
-  document.querySelectorAll('.tab').forEach(function(el, i) {
-    el.classList.toggle('active', tabs[i] === t);
-  });
-  document.querySelectorAll('.view').forEach(function(el, i) {
-    el.classList.toggle('active', tabs[i] === t);
-  });
-  if (t === 'history') renderHistory();
-  if (t === 'stats') renderStats();
-}
-
-function calcHours(start, end) {
-  if (!start || !end) return 0;
-  var sp = start.split(':').map(Number);
-  var ep = end.split(':').map(Number);
-  var mins = (ep[0] * 60 + ep[1]) - (sp[0] * 60 + sp[1]);
-  if (mins < 0) mins += 24 * 60;
-  return mins / 60;
-}
-
-function calcBooking(amount) {
-  if (!amount || amount <= 0) return 0;
-  return Math.floor(amount / 2400) * 300;
-}
-
-function calcSession(r) {
-  var hours = calcHours(r.start, r.end);
-  var hourPay = Math.round(hours * 250);
-  var glowPay = (r.glow || 0) * 100;
-  var lockPay = (r.lock || 0) * 600;
-  var bookingPay = calcBooking(r.booking || 0);
-  return { hours: hours, hourPay: hourPay, glowPay: glowPay, lockPay: lockPay, bookingPay: bookingPay, total: hourPay + glowPay + lockPay + bookingPay };
-}
-
-function updatePreview() {
-  var start = document.getElementById('f-start').value;
-  var end = document.getElementById('f-end').value;
-  var glow = parseInt(document.getElementById('f-glow').value) || 0;
-  var lock = parseInt(document.getElementById('f-lock').value) || 0;
-  var booking = parseInt(document.getElementById('f-booking').value) || 0;
-  var c = calcSession({ start: start, end: end, glow: glow, lock: lock, booking: booking });
-  var rows = [
-    { label: '時薪 × ' + c.hours.toFixed(1) + ' 小時', val: c.hourPay },
-    { label: '螢光棒 × ' + glow + ' 支', val: c.glowPay },
-    { label: '鎖台 × ' + lock + ' 次', val: c.lockPay },
-    { label: '訂位 $' + booking.toLocaleString() + ' 抽成', val: c.bookingPay },
-  ];
-  document.getElementById('preview-rows').innerHTML = rows.map(function(rw) {
-    return '<div class="preview-row"><span>' + rw.label + '</span><span class="val">$' + rw.val.toLocaleString() + '</span></div>';
-  }).join('');
-  document.getElementById('prev-total').textContent = '$' + c.total.toLocaleString();
-}
-
-function renderSummary() {
-  var ym = document.getElementById('sel-month').value;
-  var recs = records.filter(function(r) { return r.date.slice(0, 7) === ym; });
-  var totalPay = 0;
-  recs.forEach(function(r) { totalPay += calcSession(r).total; });
-  document.getElementById('mini-summary').innerHTML =
-    '<div class="sum-card"><div class="sum-num">' + recs.length + '</div><div class="sum-label">出場次數</div></div>' +
-    '<div class="sum-card highlight"><div class="sum-num">$' + totalPay.toLocaleString() + '</div><div class="sum-label">本月薪資</div></div>';
-}
-
-function addRecord() {
-  var date = document.getElementById('f-date').value;
-  var start = document.getElementById('f-start').value;
-  var end = document.getElementById('f-end').value;
-  var glow = parseInt(document.getElementById('f-glow').value) || 0;
-  var lock = parseInt(document.getElementById('f-lock').value) || 0;
-  var booking = parseInt(document.getElementById('f-booking').value) || 0;
-  if (!date || !start || !end) { showMsg('請填寫日期與時間'); return; }
-  records.unshift({ id: Date.now(), date: date, start: start, end: end, glow: glow, lock: lock, booking: booking });
-  save();
-  showMsg('已儲存！');
-  document.getElementById('f-glow').value = '';
-  document.getElementById('f-lock').value = '';
-  document.getElementById('f-booking').value = '';
-  updatePreview();
-  var ym = date.slice(0, 7);
-  var sel = document.getElementById('sel-month');
-  for (var i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].value === ym) { sel.selectedIndex = i; break; }
-  }
-  renderSummary();
-}
-
-function showMsg(m) {
-  var el = document.getElementById('msg');
-  el.textContent = m;
-  setTimeout(function() { el.textContent = ''; }, 2000);
-}
-
-function renderHistory() {
-  var ym = document.getElementById('sel-month2').value;
-  var recs = records.filter(function(r) { return r.date.slice(0, 7) === ym; });
-  var el = document.getElementById('records-list');
-  if (!recs.length) { el.innerHTML = '<div class="empty">本月尚無記錄</div>'; return; }
-  el.innerHTML = recs.map(function(r) {
-    var c = calcSession(r);
-    var chips = [r.hours ? c.hours.toFixed(1) + ' 小時' : ''];
-    if (r.glow) chips.push('螢光棒 ×' + r.glow);
-    if (r.lock) chips.push('鎖台 ×' + r.lock);
-    if (r.booking) chips.push('訂位 $' + r.booking.toLocaleString());
-    chips = chips.filter(Boolean);
-    return '<div class="rec-item">' +
-      '<div class="rec-top">' +
-        '<div><div class="rec-date">' + r.date + ' &nbsp;' + r.start + '–' + r.end + '</div></div>' +
-        '<div style="display:flex;align-items:center;gap:10px;">' +
-          '<div class="rec-total">$' + c.total.toLocaleString() + '</div>' +
-          '<button class="btn-del" onclick="deleteRecord(' + r.id + ')">✕</button>' +
-        '</div>' +
-      '</div>' +
-      '<div class="rec-chips">' + chips.map(function(ch) { return '<span class="chip">' + ch + '</span>'; }).join('') + '</div>' +
+function renderUserList() {
+  var users = getUsers();
+  var el = document.getElementById('user-list');
+  if (!users.length) { el.innerHTML = '<div class="no-users">尚無帳號，請在下方建立</div>'; return; }
+  el.innerHTML = users.map(function(u) {
+    return '<div class="user-row">' +
+      '<button class="user-btn" onclick="loginAs(\'' + u + '\')">' +
+        '<div class="user-info"><div class="user-avatar">' + initial(u) + '</div><span>' + u + '</span></div>' +
+        '<span class="user-arrow">›</span>' +
+      '</button>' +
+      '<button class="del-user-btn" onclick="deleteUser(\'' + u + '\')">刪除</button>' +
     '</div>';
   }).join('');
 }
 
-function deleteRecord(id) {
-  records = records.filter(function(r) { return r.id !== id; });
-  save();
-  renderHistory();
-  renderSummary();
+function createUser() {
+  var name = document.getElementById('new-name').value.trim();
+  if (!name) return;
+  var users = getUsers();
+  if (users.indexOf(name) !== -1) { alert('這個名字已經存在'); return; }
+  users.push(name);
+  saveUsers(users);
+  document.getElementById('new-name').value = '';
+  renderUserList();
 }
 
-function clearMonth() {
-  var ym = document.getElementById('sel-month2').value;
-  if (!confirm('確定清除本月所有記錄？')) return;
-  records = records.filter(function(r) { return r.date.slice(0, 7) !== ym; });
-  save();
-  renderHistory();
-  renderSummary();
+function deleteUser(name) {
+  if (!confirm('確定刪除「' + name + '」的帳號與所有記錄？')) return;
+  saveUsers(getUsers().filter(function(u) { return u !== name; }));
+  localStorage.removeItem('djl_rec_' + name);
+  renderUserList();
 }
 
-function renderStats() {
-  var ym = document.getElementById('sel-month3').value;
-  var recs = records.filter(function(r) { return r.date.slice(0, 7) === ym; });
-  var tot = { total: 0, hourPay: 0, glowPay: 0, lockPay: 0, bookingPay: 0, hours: 0, glow: 0, lock: 0 };
-  recs.forEach(function(r) {
-    var c = calcSession(r);
-    tot.total += c.total; tot.hourPay += c.hourPay; tot.glowPay += c.glowPay;
-    tot.lockPay += c.lockPay; tot.bookingPay += c.bookingPay;
-    tot.hours += c.hours; tot.glow += (r.glow || 0); tot.lock += (r.lock || 0);
-  });
-  document.getElementById('st-total').textContent = '$' + tot.total.toLocaleString();
-  var rows = [
-    { label: '出場次數', val: recs.length + ' 次' },
-    { label: '總工時', val: tot.hours.toFixed(1) + ' 小時' },
-    { label: '時薪收入（×$250）', val: '$' + tot.hourPay.toLocaleString() },
-    { label: '螢光棒 ' + tot.glow + ' 支（×$100）', val: '$' + tot.glowPay.toLocaleString() },
-    { label: '鎖台 ' + tot.lock + ' 次（×$600）', val: '$' + tot.lockPay.toLocaleString() },
-    { label: '訂位抽成', val: '$' + tot.bookingPay.toLocaleString() },
-  ];
-  document.getElementById('st-breakdown').innerHTML = rows.map(function(row) {
-    return '<div class="bk-row"><span class="bk-label">' + row.label + '</span><span class="bk-val">' + row.val + '</span></div>';
+function loginAs(name) {
+  currentUser = name;
+  records = getRecords();
+  document.getElementById('screen-login').style.display = 'none';
+  document.getElementById('screen-app').style.display = 'block';
+  document.getElementById('hdr-name').textContent = name;
+  document.getElementById('hdr-avatar').textContent = initial(name);
+  fillSelects();
+  switchTab('add');
+  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  renderSummary();
+  updatePreview();
+}
+
+function logout() {
+  currentUser = null; records = [];
+  document.getElementById('screen-app').style.display = 'none';
+  document.getElementById('screen-login').style.display = 'flex';
+  renderUserList();
+}
+
+function getMonths() {
+  var now = new Date(), months = [];
+  for (var i = 0; i < 6; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push({ ym: d.toISOString().slice(0,7), label: d.getFullYear() + '年' + (d.getMonth()+1) + '月' });
+  }
+  return months;
+}
+function fillSelects() {
+  var html = getMonths().map(function(m) { return '<option value="' + m.ym + '">' + m.label + '</option>'; }).join('');
+  ['sel-month','sel-month2','sel-month3'].forEach(function(id) { var el = document.getElementById(id); if(el) el.innerHTML = html; });
+}
+function switchTab(t) {
+  var tabs = ['add','history','stats'];
+  document.querySelectorAll('.tab').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
+  document.querySelectorAll('.view').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
+  if (t==='history') renderHistory();
+  if (t==='stats') renderStats();
+}
+function calcHours(s,e) {
+  if (!s||!e) return 0;
+  var sp=s.split(':').map(Number), ep=e.split(':').map(Number);
+  var m=(ep[0]*60+ep[1])-(sp[0]*60+sp[1]);
+  return (m<0?m+1440:m)/60;
+}
+function calcBooking(a) { return (!a||a<=0)?0:Math.floor(a/2400)*300; }
+function calcSession(r) {
+  var h=calcHours(r.start,r.end), hp=Math.round(h*250), gp=(r.glow||0)*100, lp=(r.lock||0)*600, bp=calcBooking(r.booking||0);
+  return {hours:h,hourPay:hp,glowPay:gp,lockPay:lp,bookingPay:bp,total:hp+gp+lp+bp};
+}
+function updatePreview() {
+  var s=document.getElementById('f-start').value, e=document.getElementById('f-end').value;
+  var gl=parseInt(document.getElementById('f-glow').value)||0;
+  var lk=parseInt(document.getElementById('f-lock').value)||0;
+  var bk=parseInt(document.getElementById('f-booking').value)||0;
+  var c=calcSession({start:s,end:e,glow:gl,lock:lk,booking:bk});
+  document.getElementById('preview-rows').innerHTML=[
+    {label:'時薪 × '+c.hours.toFixed(1)+' 小時',val:c.hourPay},
+    {label:'螢光棒 × '+gl+' 支',val:c.glowPay},
+    {label:'鎖台 × '+lk+' 次',val:c.lockPay},
+    {label:'訂位 $'+bk.toLocaleString()+' 抽成',val:c.bookingPay},
+  ].map(function(rw){return '<div class="preview-row"><span>'+rw.label+'</span><span class="val">$'+rw.val.toLocaleString()+'</span></div>';}).join('');
+  document.getElementById('prev-total').textContent='$'+c.total.toLocaleString();
+}
+function renderSummary() {
+  var ym=document.getElementById('sel-month').value;
+  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), pay=0;
+  recs.forEach(function(r){pay+=calcSession(r).total;});
+  document.getElementById('mini-summary').innerHTML=
+    '<div class="sum-card"><div class="sum-num">'+recs.length+'</div><div class="sum-label">出場次數</div></div>'+
+    '<div class="sum-card highlight"><div class="sum-num">$'+pay.toLocaleString()+'</div><div class="sum-label">本月薪資</div></div>';
+}
+function addRecord() {
+  var date=document.getElementById('f-date').value, s=document.getElementById('f-start').value, e=document.getElementById('f-end').value;
+  var gl=parseInt(document.getElementById('f-glow').value)||0, lk=parseInt(document.getElementById('f-lock').value)||0, bk=parseInt(document.getElementById('f-booking').value)||0;
+  if (!date||!s||!e){showMsg('請填寫日期與時間');return;}
+  records.unshift({id:Date.now(),date:date,start:s,end:e,glow:gl,lock:lk,booking:bk});
+  save(); showMsg('已儲存！');
+  ['f-glow','f-lock','f-booking'].forEach(function(id){document.getElementById(id).value='';});
+  updatePreview();
+  var ym=date.slice(0,7), sel=document.getElementById('sel-month');
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===ym){sel.selectedIndex=i;break;}}
+  renderSummary();
+}
+function showMsg(m) { var el=document.getElementById('msg'); el.textContent=m; setTimeout(function(){el.textContent='';},2000); }
+function renderHistory() {
+  var ym=document.getElementById('sel-month2').value;
+  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), el=document.getElementById('records-list');
+  if(!recs.length){el.innerHTML='<div class="empty">本月尚無記錄</div>';return;}
+  el.innerHTML=recs.map(function(r){
+    var c=calcSession(r), chips=[c.hours.toFixed(1)+' 小時'];
+    if(r.glow) chips.push('螢光棒 ×'+r.glow);
+    if(r.lock) chips.push('鎖台 ×'+r.lock);
+    if(r.booking) chips.push('訂位 $'+r.booking.toLocaleString());
+    return '<div class="rec-item"><div class="rec-top"><div class="rec-date">'+r.date+' '+r.start+'–'+r.end+'</div>'+
+      '<div style="display:flex;align-items:center;gap:10px;"><div class="rec-total">$'+c.total.toLocaleString()+'</div>'+
+      '<button class="btn-del" onclick="deleteRecord('+r.id+')">✕</button></div></div>'+
+      '<div class="rec-chips">'+chips.map(function(ch){return '<span class="chip">'+ch+'</span>';}).join('')+'</div></div>';
   }).join('');
 }
-
-fillSelects();
-document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
-renderSummary();
-updatePreview();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+function deleteRecord(id) { records=records.filter(function(r){return r.id!==id;}); save(); renderHistory(); renderSummary(); }
+function clearMonth() {
+  var ym=document.getElementById('sel-month2').value;
+  if(!confirm('確定清除本月所有記錄？')) return;
+  records=records.filter(function(r){return r.date.slice(0,7)!==ym;}); save(); renderHistory(); renderSummary();
 }
+function renderStats() {
+  var ym=document.getElementById('sel-month3').value;
+  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), tot={total:0,hourPay:0,glowPay:0,lockPay:0,bookingPay:0,hours:0,glow:0,lock:0};
+  recs.forEach(function(r){var c=calcSession(r);tot.total+=c.total;tot.hourPay+=c.hourPay;tot.glowPay+=c.glowPay;tot.lockPay+=c.lockPay;tot.bookingPay+=c.bookingPay;tot.hours+=c.hours;tot.glow+=(r.glow||0);tot.lock+=(r.lock||0);});
+  document.getElementById('st-total').textContent='$'+tot.total.toLocaleString();
+  document.getElementById('st-breakdown').innerHTML=[
+    {label:'出場次數',val:recs.length+' 次'},
+    {label:'總工時',val:tot.hours.toFixed(1)+' 小時'},
+    {label:'時薪收入（×$250）',val:'$'+tot.hourPay.toLocaleString()},
+    {label:'螢光棒 '+tot.glow+' 支（×$100）',val:'$'+tot.glowPay.toLocaleString()},
+    {label:'鎖台 '+tot.lock+' 次（×$600）',val:'$'+tot.lockPay.toLocaleString()},
+    {label:'訂位抽成',val:'$'+tot.bookingPay.toLocaleString()},
+  ].map(function(row){return '<div class="bk-row"><span class="bk-label">'+row.label+'</span><span class="bk-val">'+row.val+'</span></div>';}).join('');
+}
+
+renderUserList();
+document.getElementById('new-name').addEventListener('keydown',function(e){if(e.key==='Enter') createUser();});
 </script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script>
 </body>
 </html>
