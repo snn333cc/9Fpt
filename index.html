@@ -247,13 +247,12 @@ function renderUserList() {
   if (!users.length) { el.innerHTML = '<div class="no-users">尚無帳號，請在下方建立</div>'; return; }
   el.innerHTML = users.map(function(u) {
     var n = u.name;
-    return '<div class="user-row">' +
-      '<button class="user-btn" onclick="askPin('' + n + '')">'+
+    var btn = '<button class="user-btn" onclick="askPin(\'' + n + '\')">'+
         '<div class="user-info"><div class="user-avatar">' + initial(n) + '</div><span>' + n + '</span></div>' +
         '<span class="user-arrow">›</span>' +
-      '</button>' +
-      '<button class="del-user-btn" onclick="deleteUser('' + n + '')">刪除</button>' +
-    '</div>';
+      '</button>';
+    var del = '<button class="del-user-btn" onclick="deleteUser(\'' + n + '\')">刪除</button>';
+    return '<div class="user-row">' + btn + del + '</div>';
   }).join('');
 }
 
