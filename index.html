@@ -1,441 +1,2125 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
+<head><meta name="google-site-verification" content="googleaf1956ebb705c5c8" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>遞酒樓 薪資記錄</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#C9A84C">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="薪資記錄">
-<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>遞酒樓 DI JIU LOU｜嘉義第一家 Talking Bar</title>
+<meta name="description" content="嘉義市第一家Talking Bar，精典特調、霓虹夜店氛圍，每週精彩活動。忠義街143號，營業21:00–05:00。" />
+<meta name="keywords" content="遞酒樓,嘉義酒吧,嘉義Talking Bar,嘉義夜生活,Di Jiu Lou,忠義街" />
+<meta property="og:title" content="遞酒樓｜嘉義第一家 Talking Bar" />
+<meta property="og:description" content="嘉義忠義街143號，霓虹夜店氛圍，精彩特調與活動。" />
+<meta property="og:url" content="https://dijiulou.netlify.app" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=Cinzel:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --gold: #C9A84C; --gold-dim: #8a6d2e; --bg: #0e0b08;
-  --surface: #1a1510; --surface2: #221c14;
-  --border: rgba(201,168,76,0.2); --border2: rgba(201,168,76,0.4);
-  --text: #f0e8d5; --text-dim: #8a7d65; --red: #c0392b;
+  --gold: #C9A84C;
+  --gold-light: #E8CC84;
+  --gold-dim: #8A6E2F;
+  --dark: #0A0806;
+  --dark2: #0A0806;
+  --dark3: #0A0806;
+  --dark4: #0A0806;
+  --cream: #F5EDD8;
+  --cream-dim: #B8A882;
 }
-html, body { min-height: 100vh; background: var(--bg); }
-body { font-family: 'Noto Sans TC', sans-serif; color: var(--text); font-size: 14px; display: flex; justify-content: center; padding: 20px 12px 40px; }
-.app { width: 100%; max-width: 480px; }
 
-/* LOGIN */
-#screen-login { display: flex; flex-direction: column; align-items: center; padding: 48px 0 0; }
-.login-logo { font-size: 22px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
-.login-sub { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 40px; }
-.login-box { width: 100%; background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 20px; margin-bottom: 14px; }
-.login-box-title { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 14px; }
-.user-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.user-row:last-child { margin-bottom: 0; }
-.user-btn { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text); font-family: inherit; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s; }
-.user-btn:hover { border-color: var(--gold); }
-.user-info { display: flex; align-items: center; gap: 12px; }
-.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #0e0b08; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-.user-arrow { color: var(--text-dim); }
-.del-user-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text-dim); cursor: pointer; font-size: 12px; flex-shrink: 0; }
-.del-user-btn:hover { color: var(--red); border-color: var(--red); }
-.new-user-form { display: flex; gap: 8px; width: 100%; }
-.new-user-form input { flex: 1; min-width: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; }
-.new-user-form input:focus { border-color: var(--gold); }
-.new-user-form button { flex-shrink: 0; background: var(--gold); border: none; border-radius: 8px; padding: 10px 14px; color: #0e0b08; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; }
-.no-users { font-size: 12px; color: var(--text-dim); text-align: center; padding: 10px 0; letter-spacing: 1px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* MAIN APP */
-#screen-app { display: none; background: var(--bg); border-radius: 16px; border: 1px solid var(--border2); overflow: hidden; }
-.hdr { background: var(--surface); border-bottom: 1px solid var(--border2); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
-.hdr-left { display: flex; align-items: center; gap: 10px; }
-.hdr-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: #0e0b08; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-.hdr-title { font-size: 14px; color: var(--gold); letter-spacing: 1px; }
-.hdr-sub { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
-.btn-logout { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; color: var(--text-dim); font-family: inherit; font-size: 11px; cursor: pointer; }
-.btn-logout:hover { color: var(--text); border-color: var(--border2); }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
 
-.tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border2); }
-.tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 12px; cursor: pointer; color: var(--text-dim); border: none; background: none; font-family: inherit; letter-spacing: 1px; transition: color 0.2s; }
-.tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-.view { display: none; padding: 18px; }
-.view.active { display: block; }
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  max-width: 100vw;
+}
 
-.month-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.month-bar select { flex: 1; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 9px 12px; color: var(--text); font-family: inherit; font-size: 13px; outline: none; appearance: none; cursor: pointer; }
-.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-.sum-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 14px; text-align: center; }
-.sum-card.highlight { border-color: var(--gold); background: var(--surface2); }
-.sum-num { font-size: 22px; font-weight: 700; color: var(--gold); }
-.sum-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; letter-spacing: 1px; }
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0.6rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(10,8,6,0.95), transparent);
+  border-bottom: 0.5px solid rgba(201,168,76,0.15);
+  backdrop-filter: blur(4px);
+}
 
-.form-section { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
-.sec-title { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 12px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
-.fg { display: flex; flex-direction: column; gap: 5px; }
-.fg label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; }
-.fg input { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; color: var(--text); font-family: inherit; font-size: 13px; outline: none; transition: border-color 0.2s; width: 100%; }
-.fg input:focus { border-color: var(--gold); }
+.nav-logo {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
 
-.preview-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--text-dim); }
-.preview-row:last-child { border-bottom: none; }
-.preview-row .val { color: var(--gold); font-size: 13px; font-weight: 500; }
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
 
-.btn-add { width: 100%; padding: 12px; background: var(--gold); color: #0e0b08; border: none; border-radius: 8px; font-size: 14px; font-family: inherit; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: opacity 0.2s; margin-top: 4px; }
-.btn-add:hover { opacity: 0.85; }
-.msg { text-align: center; font-size: 12px; margin-top: 10px; color: var(--gold); min-height: 18px; letter-spacing: 1px; }
+.nav-links a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+  transition: color 0.3s;
+}
 
-.rec-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
-.rec-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.rec-date { font-size: 13px; color: var(--text); }
-.rec-total { font-size: 16px; color: var(--gold); font-weight: 700; }
-.rec-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-size: 11px; padding: 3px 8px; border-radius: 20px; background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); }
-.btn-del { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 14px; padding: 0 4px; font-family: inherit; }
-.btn-del:hover { color: var(--red); }
-.empty { text-align: center; color: var(--text-dim); font-size: 12px; padding: 40px 0; letter-spacing: 1px; }
+.nav-links a:hover { color: var(--gold); }
 
-.big-salary { text-align: center; padding: 28px 0 20px; }
-.big-salary .amount { font-size: 42px; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
-.big-salary .label { font-size: 12px; color: var(--text-dim); margin-top: 6px; letter-spacing: 2px; }
-.breakdown { background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; }
-.bk-row { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
-.bk-row:last-child { border-bottom: none; }
-.bk-label { color: var(--text-dim); }
-.bk-val { color: var(--text); font-weight: 500; }
+/* ── HERO ── */
+#hero {
+  padding-top: 90px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(201,168,76,0.05) 0%, transparent 60%);
+}
+
+/* Neon grid lines */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Neon corner accents */
+.corner {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-color: var(--gold-dim);
+  border-style: solid;
+  opacity: 0.4;
+}
+.corner-tl { top: 80px; left: 40px; border-width: 1px 0 0 1px; }
+.corner-tr { top: 80px; right: 40px; border-width: 1px 1px 0 0; }
+.corner-bl { bottom: 60px; left: 40px; border-width: 0 0 1px 1px; }
+.corner-br { bottom: 60px; right: 40px; border-width: 0 1px 1px 0; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-logo-img {
+  width: 380px;
+  height: 380px;
+  object-fit: contain;
+  margin-bottom: 2rem;
+  animation: pulseGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 18px rgba(201,168,76,0.6))
+            drop-shadow(0 0 40px rgba(201,168,76,0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 35px rgba(201,168,76,1))
+            drop-shadow(0 0 70px rgba(201,168,76,0.6))
+            drop-shadow(0 0 120px rgba(232,204,132,0.35));
+  }
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-shadow: 0 0 60px rgba(201,168,76,0.4);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.hero-subtitle-cn {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.6em;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+
+.hero-tagline {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+/* Neon divider */
+.neon-divider {
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem auto;
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.hero-info {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-info-item {
+  text-align: center;
+}
+
+.hero-info-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.hero-info-value {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.95rem;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+}
+
+/* ── SECTION BASE ── */
+section {
+  padding: 6rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+
+/* ── ABOUT ── */
+#about {
+  background: var(--dark2);
+  max-width: 100%;
+  padding: 6rem 2rem;
+}
+
+#about .inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: var(--cream-dim);
+  letter-spacing: 0.08em;
+}
+
+.about-text strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ── EVENT ── */
+#event {
+  background: var(--dark3);
+  max-width: 100%;
+  padding: 6rem 2rem;
+}
+
+#event .inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.event-card {
+  border: 1px solid var(--gold-dim);
+  padding: 3rem 3.5rem;
+  text-align: center;
+  position: relative;
+  background: rgba(201,168,76,0.03);
+}
+
+.event-card::before,
+.event-card::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: var(--gold);
+  border-style: solid;
+}
+.event-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.event-card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.event-day {
+  font-family: 'Cinzel', serif;
+  font-size: 4rem;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(201,168,76,0.6);
+  line-height: 1;
+}
+
+.event-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin: 1rem 0;
+  letter-spacing: 0.2em;
+}
+
+.event-detail {
+  font-size: 1rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+
+.event-price {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: var(--gold-light);
+  margin-top: 1rem;
+  text-shadow: 0 0 20px rgba(201,168,76,0.5);
+}
+
+.event-slogan {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  font-style: italic;
+}
+
+/* ── MENU ── */
+#menu {
+  background: var(--dark);
+  max-width: 100%;
+  padding: 6rem 2rem;
+}
+
+#menu .inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 3rem;
+  border: 1px solid var(--gold-dim);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu-tab {
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--cream-dim);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-right: 1px solid var(--gold-dim);
+}
+
+.menu-tab:last-child { border-right: none; }
+
+.menu-tab.active,
+.menu-tab:hover {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold);
+}
+
+.menu-section { display: none; }
+.menu-section.active { display: block; }
+
+.menu-category {
+  margin-bottom: 2.5rem;
+}
+
+.menu-cat-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 0.5px solid rgba(201,168,76,0.3);
+}
+
+.menu-items {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.04);
+}
+
+.menu-item-name {
+  font-size: 0.92rem;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+}
+
+.menu-item-price {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+/* ── RULES ── */
+#rules {
+  background: var(--dark2);
+  max-width: 100%;
+  padding: 6rem 2rem;
+}
+
+#rules .inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.rule-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 1.2rem;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,168,76,0.03);
+}
+
+.rule-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+
+.rule-text {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  letter-spacing: 0.05em;
+}
+
+.rule-text strong { color: var(--gold-light); }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--dark3);
+  max-width: 100%;
+  padding: 6rem 2rem;
+}
+
+#contact .inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.contact-card {
+  padding: 0.8rem 1.2rem;
+  border: 0.5px solid rgba(201,168,76,0.2);
+  background: rgba(201,168,76,0.03);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.contact-card:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.contact-icon {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.contact-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.contact-value {
+  font-size: 0.85rem;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+.contact-value a {
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-value a:hover { color: var(--gold); }
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  transition: all 0.3s;
+  font-family: 'Cinzel', serif;
+}
+
+.social-btn:hover {
+  background: var(--gold);
+  color: var(--dark);
+  box-shadow: 0 0 20px rgba(201,168,76,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(201,168,76,0.15);
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim);
+}
+
+/* ── FADE IN ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .nav-links a { font-size: 0.7rem; }
+  .hero-info { gap: 1.5rem; }
+  .event-card { padding: 2rem 1.5rem; }
+  .menu-tab { padding: 0.6rem 0.8rem; font-size: 0.7rem; }
+  .corner { display: none; }
+}
+
+/* ══════════════════════════════
+   MOBILE FIRST 全面優化
+══════════════════════════════ */
+
+/* 漢堡選單 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+  display: block;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+
+
+
+
+@media (max-width: 768px) {
+  /* Nav */
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+
+  /* Hero */
+  #hero { min-height: 100svh; }
+  .hero-logo-img { width: 82vw; max-width: 380px; height: auto; margin-bottom: 1.5rem; }
+  .hero-title { font-size: 2.8rem; letter-spacing: 0.12em; }
+  .hero-subtitle-cn { font-size: 1.6rem; letter-spacing: 0.4em; }
+  .hero-tagline { font-size: 0.75rem; }
+
+  /* Sections padding */
+  section { padding: 4rem 1.2rem; }
+
+  /* Section titles */
+  .section-title { font-size: 1.8rem; letter-spacing: 0.12em; }
+
+  /* About text */
+  .about-text { font-size: 1.05rem; line-height: 2.1; }
+
+  /* Event 格子 */
+  .event-card { padding: 2rem 1.5rem; }
+  .event-day { font-size: 2.5rem; }
+  .event-price { font-size: 1.5rem; }
+
+  /* Menu tabs - 手機版與電腦版一致 */
+  .menu-main-nav {
+    margin-bottom: 1.2rem;
+    gap: 0;
+    justify-content: center;
+  }
+  .menu-main-btn {
+    font-size: 0.82rem;
+    padding: 0.4rem 1.2rem;
+    letter-spacing: 0.12em;
+  }
+  .menu-main-sep {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(201,168,76,0.3);
+    font-size: 1rem;
+    padding: 0 0.2rem;
+  }
+  .menu-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    border: 1px solid var(--gold-dim) !important;
+    border-radius: 0 !important;
+    gap: 0 !important;
+    padding-bottom: 0 !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .menu-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    border: none !important;
+    border-right: 1px solid var(--gold-dim) !important;
+    border-radius: 0 !important;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.74rem !important;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .menu-tab:last-child { border-right: none !important; }
+
+  /* Menu items */
+  .menu-item { padding: 0.8rem 0; }
+  .menu-item-name { font-size: 0.95rem; }
+  .menu-item-price { font-size: 0.85rem; }
+
+  /* 公關網格 */
+  #girls-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+  .girl-name { font-size: 0.9rem; }
+  .girl-tag { font-size: 0.6rem; }
+
+  /* 分頁按鈕 */
+  .girl-filter { padding: 0.5rem 1rem !important; font-size: 0.72rem !important; letter-spacing: 0.1em !important; }
+
+  /* Contact */
+
+  /* Rules */
+  .rule-text { font-size: 0.92rem; }
+
+  /* Slider buttons */
+
+  /* Corner decorations - hide on mobile */
+  .corner { display: none; }
+}
+
+@media (max-width: 400px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-subtitle-cn { font-size: 1.3rem; }
+  #girls-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
 </style>
 </head>
 <body>
-<div class="app">
 
-  <!-- LOGIN SCREEN -->
-  <div id="screen-login">
-    <div class="login-logo">遞酒樓 薪資記錄</div>
-    <div class="login-sub">個人出勤與業績追蹤</div>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">遞酒樓</a>
+  <ul class="nav-links">
+    <li><a href="#about">關於</a></li>
+    <li><a href="#menu">酒單</a></li>
+    <li><a href="#girls">公關</a></li>
+    <li><a href="#event">活動</a></li>
+    <li><a href="#contact">聯絡</a></li>
+  </ul>
+</nav>
 
-    <div class="login-box">
-      <div class="login-box-title">選擇帳號</div>
-      <div id="user-list"></div>
-    </div>
-
-    <div class="login-box">
-      <div class="login-box-title">建立新帳號</div>
-      <div class="new-user-form">
-        <input type="text" id="new-name" placeholder="名字" maxlength="12">
-        <input type="password" id="new-pin" placeholder="4位密碼" maxlength="4" inputmode="numeric" style="flex-shrink:0;width:90px;">
-        <button onclick="createUser()">建立</button>
-      </div>
-    </div>
+<!-- 跑馬燈 -->
+<div style="position:fixed;top:56px;left:0;right:0;z-index:89;background:rgba(10,8,6,0.92);border-top:0.5px solid rgba(201,168,76,0.2);border-bottom:0.5px solid rgba(201,168,76,0.3);padding:0.3rem 0;overflow:hidden;white-space:nowrap;">
+  <div style="display:inline-flex;animation:marquee 25s linear infinite;" id="mq">
+    <span class="mq-text">基礎消費：低消 $600 / 人，當桌破萬開禮炮、公關熱舞，未滿 18 歲禁止入場 🍺 &nbsp;・&nbsp; <span style="color:#ff4444;font-weight:500;">高薪徵美女正職 / PT，歡迎詢問 !!!</span> &nbsp;・&nbsp; 基礎消費：低消 $600 / 人，當桌破萬開禮炮、公關熱舞，未滿 18 歲禁止入場 🍺 &nbsp;・&nbsp; <span style="color:#ff4444;font-weight:500;">高薪徵美女正職 / PT，歡迎詢問 !!!</span> &nbsp;・&nbsp;</span>
   </div>
-
-  <!-- PIN OVERLAY -->
-  <div id="pin-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;">
-    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;width:280px;text-align:center;">
-      <div style="font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;" id="pin-username"></div>
-      <div style="font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-bottom:18px;">請輸入 4 位密碼</div>
-      <input type="password" id="pin-input" maxlength="4" inputmode="numeric" placeholder="••••" style="width:100%;text-align:center;font-size:24px;letter-spacing:8px;padding:12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:inherit;outline:none;margin-bottom:14px;">
-      <div style="display:flex;gap:8px;">
-        <button onclick="cancelPin()" style="flex:1;padding:10px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text-dim);font-family:inherit;cursor:pointer;">取消</button>
-        <button onclick="confirmPin()" style="flex:1;padding:10px;background:var(--gold);border:none;border-radius:8px;color:#0e0b08;font-family:inherit;font-weight:700;cursor:pointer;">確認</button>
-      </div>
-      <div id="pin-err" style="font-size:12px;color:var(--red);margin-top:10px;min-height:16px;"></div>
-    </div>
-  </div>
-
-  <!-- MAIN APP -->
-  <div id="screen-app">
-    <div class="hdr">
-      <div class="hdr-left">
-        <div class="hdr-avatar" id="hdr-avatar"></div>
-        <div>
-          <div class="hdr-title" id="hdr-name"></div>
-          <div class="hdr-sub">遞酒樓 薪資記錄</div>
-        </div>
-      </div>
-      <button class="btn-logout" onclick="logout()">切換帳號</button>
-    </div>
-
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('add')">新增班次</button>
-      <button class="tab" onclick="switchTab('history')">出勤記錄</button>
-      <button class="tab" onclick="switchTab('stats')">當月薪資</button>
-    </div>
-
-    <div class="view active" id="view-add">
-      <div class="month-bar">
-        <select id="sel-month" onchange="renderSummary()"></select>
-      </div>
-      <div class="summary-grid" id="mini-summary"></div>
-
-      <div class="form-section">
-        <div class="sec-title">出勤時間</div>
-        <div class="form-grid three">
-          <div class="fg"><label>日期</label><input type="date" id="f-date"></div>
-          <div class="fg"><label>上班</label><input type="time" id="f-start"></div>
-          <div class="fg"><label>下班</label><input type="time" id="f-end"></div>
-        </div>
-      </div>
-
-      <div class="form-section">
-        <div class="sec-title">業績</div>
-        <div class="form-grid">
-          <div class="fg"><label>螢光棒（支）</label><input type="number" id="f-glow" placeholder="0" min="0" oninput="updatePreview()"></div>
-          <div class="fg"><label>鎖台（次）</label><input type="number" id="f-lock" placeholder="0" min="0" oninput="updatePreview()"></div>
-        </div>
-        <div style="margin-top:10px;">
-          <div class="fg"><label>訂位消費金額（元）</label><input type="number" id="f-booking" placeholder="0" min="0" oninput="updatePreview()"></div>
-        </div>
-      </div>
-
-      <div class="form-section">
-        <div class="sec-title">本場試算</div>
-        <div id="preview-rows"></div>
-        <div class="preview-row" style="border-top:1px solid var(--border2);margin-top:6px;padding-top:10px;">
-          <span style="color:var(--text);font-size:13px;font-weight:500;">本場合計</span>
-          <span class="val" id="prev-total" style="font-size:17px;">$0</span>
-        </div>
-      </div>
-
-      <button class="btn-add" onclick="addRecord()">儲存這班</button>
-      <div class="msg" id="msg"></div>
-    </div>
-
-    <div class="view" id="view-history">
-      <div class="month-bar">
-        <select id="sel-month2" onchange="renderHistory()"></select>
-        <button onclick="clearMonth()" style="background:none;border:none;color:var(--red);font-size:11px;font-family:inherit;cursor:pointer;white-space:nowrap;padding:0 8px;">清除本月</button>
-      </div>
-      <div id="records-list"></div>
-    </div>
-
-    <div class="view" id="view-stats">
-      <div class="month-bar">
-        <select id="sel-month3" onchange="renderStats()"></select>
-      </div>
-      <div class="big-salary">
-        <div class="amount" id="st-total">$0</div>
-        <div class="label">本月薪資總計</div>
-      </div>
-      <div class="breakdown" id="st-breakdown"></div>
-    </div>
-  </div>
-
 </div>
+<style>
+.mq-text {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-family: 'Noto Sans TC', sans-serif;
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+#mq:hover { animation-play-state: paused; }
+</style>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="hero-content">
+    <img src="logo.png" alt="遞酒樓 Logo" class="hero-logo-img">
+
+    <div class="hero-tagline" style="margin-top:0;margin-bottom:2.5rem;">嘉義第一家 Talking Bar</div>
+
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <div class="hero-info-label">地址</div>
+        <div class="hero-info-value">嘉義市忠義街 143 號</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">營業時間</div>
+        <div class="hero-info-value">21:00 — 05:00</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">電話</div>
+        <div class="hero-info-value">0930 718 886</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.google.com/maps/search/?api=1&query=嘉義市忠義街143號" target="_blank" class="social-btn" style="display:inline-flex;align-items:center;gap:0.6rem;font-family:'Noto Sans TC',sans-serif;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Google 導航
+      </a>
+      <a href="https://line.me/R/ti/p/@706ptcce" target="_blank" class="social-btn" style="display:inline-flex;align-items:center;gap:0.6rem;font-family:'Noto Sans TC',sans-serif;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        官方 LINE
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" style="background:var(--dark2);padding:5rem 1.5rem;">
+  <div style="max-width:700px;margin:0 auto;">
+
+    <!-- 指示點 -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:1rem;margin-bottom:2.5rem;">
+      <div class="sdot active" onclick="goSlide(0)" style="width:32px;height:2px;background:var(--gold);cursor:pointer;transition:all 0.3s;box-shadow:0 0 6px var(--gold);"></div>
+      <div class="sdot" onclick="goSlide(1)" style="width:20px;height:2px;background:var(--gold-dim);cursor:pointer;transition:all 0.3s;"></div>
+    </div>
+
+    <!-- Slider 外框 -->
+    <div style="overflow:hidden;position:relative;" id="slider-wrap">
+      <div id="slider-track" style="display:flex;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);">
+
+        <!-- 第一頁：關於 -->
+        <div class="slide-panel">
+          <div style="text-align:center;">
+            <span class="section-label">About Us</span>
+            <div class="section-title" style="margin-bottom:2rem;">關 於 遞 酒 樓</div>
+            <p class="about-text">
+              遞酒樓，是嘉義<strong>第一家 Talking Bar</strong>。<br><br>
+              這裡不只有酒，更有話語、有溫度、有故事。<br><br>
+              <strong>我說天長，你說遞酒。<br>
+              遞酒樓，等你來飲酒。</strong>
+            </p>
+            <div style="margin-top:2rem;">
+              <button onclick="goSlide(1)" style="background:transparent;border:1px solid var(--gold-dim);color:var(--gold-dim);padding:0.6rem 1.8rem;font-size:0.78rem;letter-spacing:0.2em;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all 0.3s;">
+                查看入場須知 →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第二頁：入場須知 -->
+        <div class="slide-panel">
+          <div>
+            <div style="text-align:center;margin-bottom:2rem;">
+              <span class="section-label">House Rules</span>
+              <div class="section-title">入 場 須 知</div>
+            </div>
+            <div class="rules-grid">
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>消費低消</strong>：$600 / 人，一支螢光棒 = $200</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>嘔吐清潔費</strong>：$3,000 元</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>砸蛋糕清潔費</strong>：$6,000 元</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>自行帶酒需開瓶費</strong>：$1,500 元</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text">請勿過度飲酒，店內財產因過人因素造成損壞，<strong>須照常賠償</strong></div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>未滿 18 歲禁止</strong>飲酒／禁止吸菸／禁止進入</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text"><strong>禁止攜帶外食</strong>，如有攜帶，需酌收清潔費 $300</div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text">禁止<strong>任何不雅與性騷擾行為</strong></div></div>
+              <div class="rule-item"><div class="rule-dot"></div><div class="rule-text">以上禁止行為，<strong>有涉嫌法律將一律報警處理</strong></div></div>
+            </div>
+            <div style="text-align:center;margin-top:1.8rem;">
+              <button onclick="goSlide(0)" style="background:transparent;border:1px solid var(--gold-dim);color:var(--gold-dim);padding:0.6rem 1.8rem;font-size:0.78rem;letter-spacing:0.2em;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all 0.3s;">
+                ← 返回關於
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.slide-panel {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sdot { transition: all 0.3s; }
+</style>
+
 <script>
-var currentUser = null;
-var records = [];
-
-function getUsers() {
-  try {
-    var raw = JSON.parse(localStorage.getItem('djl_users') || '[]');
-    // migrate old format (array of strings)
-    return raw.map(function(u){ return typeof u==='string' ? {name:u,pin:''} : u; });
-  } catch(e) { return []; }
+var _cur = 0;
+function goSlide(n) {
+  _cur = n;
+  var wrap = document.getElementById('slider-wrap');
+  var track = document.getElementById('slider-track');
+  var w = wrap.offsetWidth;
+  track.style.transform = 'translateX(-' + (n * w) + 'px)';
+  document.querySelectorAll('.sdot').forEach(function(d, i) {
+    d.style.background = i === n ? 'var(--gold)' : 'var(--gold-dim)';
+    d.style.width = i === n ? '32px' : '20px';
+    d.style.boxShadow = i === n ? '0 0 6px var(--gold)' : 'none';
+  });
 }
-function saveUsers(u) { localStorage.setItem('djl_users', JSON.stringify(u)); }
-function getRecords() {
-  if (!currentUser) return [];
-  try { return JSON.parse(localStorage.getItem('djl_rec_' + currentUser) || '[]'); } catch(e) { return []; }
-}
-// currentUser is always the name string
-function save() { if (currentUser) localStorage.setItem('djl_rec_' + currentUser, JSON.stringify(records)); }
-function initial(name) { return name ? name.slice(0,1).toUpperCase() : '?'; }
-
-function renderUserList() {
-  var users = getUsers();
-  var el = document.getElementById('user-list');
-  if (!users.length) { el.innerHTML = '<div class="no-users">尚無帳號，請在下方建立</div>'; return; }
-  el.innerHTML = users.map(function(u) {
-    var n = u.name;
-    var btn = '<button class="user-btn" onclick="askPin(\'' + n + '\')">'+
-        '<div class="user-info"><div class="user-avatar">' + initial(n) + '</div><span>' + n + '</span></div>' +
-        '<span class="user-arrow">›</span>' +
-      '</button>';
-    var del = '<button class="del-user-btn" onclick="deleteUser(\'' + n + '\')">刪除</button>';
-    return '<div class="user-row">' + btn + del + '</div>';
-  }).join('');
-}
-
-function createUser() {
-  var name = document.getElementById('new-name').value.trim();
-  var pin = document.getElementById('new-pin').value.trim();
-  if (!name) { alert('請輸入名字'); return; }
-  if (pin.length !== 4 || !/^[0-9]{4}$/.test(pin)) { alert('請輸入4位數字密碼'); return; }
-  var users = getUsers();
-  if (users.find(function(u){return u.name===name;})) { alert('這個名字已經存在'); return; }
-  users.push({name:name,pin:pin});
-  saveUsers(users);
-  document.getElementById('new-name').value = '';
-  document.getElementById('new-pin').value = '';
-  renderUserList();
-}
-
-function deleteUser(name) {
-  if (!confirm('確定刪除「' + name + '」的帳號與所有記錄？')) return;
-  saveUsers(getUsers().filter(function(u) { return u.name !== name; }));
-  localStorage.removeItem('djl_rec_' + name);
-  renderUserList();
-}
-
-var pinTarget = null;
-function askPin(name) {
-  pinTarget = name;
-  document.getElementById('pin-username').textContent = name;
-  document.getElementById('pin-input').value = '';
-  document.getElementById('pin-err').textContent = '';
-  var ov = document.getElementById('pin-overlay');
-  ov.style.display = 'flex';
-  setTimeout(function(){ document.getElementById('pin-input').focus(); }, 100);
-}
-function cancelPin() {
-  document.getElementById('pin-overlay').style.display = 'none';
-  pinTarget = null;
-}
-function confirmPin() {
-  var entered = document.getElementById('pin-input').value;
-  var users = getUsers();
-  var user = users.find(function(u){ return u.name === pinTarget; });
-  if (!user || entered !== user.pin) {
-    document.getElementById('pin-err').textContent = '密碼錯誤，請再試一次';
-    document.getElementById('pin-input').value = '';
-    return;
-  }
-  document.getElementById('pin-overlay').style.display = 'none';
-  loginAs(pinTarget);
-  pinTarget = null;
-}
-
-function loginAs(name) {
-  currentUser = name;
-  records = getRecords();
-  document.getElementById('screen-login').style.display = 'none';
-  document.getElementById('screen-app').style.display = 'block';
-  document.getElementById('hdr-name').textContent = name;
-  document.getElementById('hdr-avatar').textContent = initial(name);
-  fillSelects();
-  switchTab('add');
-  var _now = new Date();
-  var _y = _now.getFullYear(), _m = _now.getMonth()+1, _d = _now.getDate();
-  document.getElementById('f-date').value = _y + '-' + (_m<10?'0'+_m:''+_m) + '-' + (_d<10?'0'+_d:''+_d);
-  renderSummary();
-  updatePreview();
-}
-
-function logout() {
-  currentUser = null; records = [];
-  document.getElementById('screen-app').style.display = 'none';
-  document.getElementById('screen-login').style.display = 'flex';
-  renderUserList();
-}
-
-function getMonths() {
-  var now = new Date(), months = [];
-  for (var i = 0; i < 6; i++) {
-    var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    var y = d.getFullYear();
-    var m = d.getMonth() + 1;
-    var ym = y + '-' + (m < 10 ? '0' + m : '' + m);
-    months.push({ ym: ym, label: y + '年' + m + '月' });
-  }
-  return months;
-}
-function fillSelects() {
-  var html = getMonths().map(function(m) { return '<option value="' + m.ym + '">' + m.label + '</option>'; }).join('');
-  ['sel-month','sel-month2','sel-month3'].forEach(function(id) { var el = document.getElementById(id); if(el) el.innerHTML = html; });
-}
-function switchTab(t) {
-  var tabs = ['add','history','stats'];
-  document.querySelectorAll('.tab').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
-  document.querySelectorAll('.view').forEach(function(el,i) { el.classList.toggle('active', tabs[i]===t); });
-  if (t==='add') renderSummary();
-  if (t==='history') renderHistory();
-  if (t==='stats') renderStats();
-}
-function calcHours(s,e) {
-  if (!s||!e) return 0;
-  var sp=s.split(':').map(Number), ep=e.split(':').map(Number);
-  var m=(ep[0]*60+ep[1])-(sp[0]*60+sp[1]);
-  return (m<0?m+1440:m)/60;
-}
-function calcBooking(a) { return (!a||a<=0)?0:Math.floor(a/2400)*300; }
-function calcSession(r) {
-  var h=calcHours(r.start,r.end), hp=Math.round(h*250), gp=(r.glow||0)*100, lp=(r.lock||0)*600, bp=calcBooking(r.booking||0);
-  return {hours:h,hourPay:hp,glowPay:gp,lockPay:lp,bookingPay:bp,total:hp+gp+lp+bp};
-}
-function updatePreview() {
-  var s=document.getElementById('f-start').value, e=document.getElementById('f-end').value;
-  var gl=parseInt(document.getElementById('f-glow').value)||0;
-  var lk=parseInt(document.getElementById('f-lock').value)||0;
-  var bk=parseInt(document.getElementById('f-booking').value)||0;
-  var c=calcSession({start:s,end:e,glow:gl,lock:lk,booking:bk});
-  document.getElementById('preview-rows').innerHTML=[
-    {label:'時薪 × '+c.hours.toFixed(1)+' 小時',val:c.hourPay},
-    {label:'螢光棒 × '+gl+' 支',val:c.glowPay},
-    {label:'鎖台 × '+lk+' 次',val:c.lockPay},
-    {label:'訂位 $'+bk.toLocaleString()+' 抽成',val:c.bookingPay},
-  ].map(function(rw){return '<div class="preview-row"><span>'+rw.label+'</span><span class="val">$'+rw.val.toLocaleString()+'</span></div>';}).join('');
-  document.getElementById('prev-total').textContent='$'+c.total.toLocaleString();
-}
-function renderSummary() {
-  var ym=document.getElementById('sel-month').value;
-  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), pay=0;
-  recs.forEach(function(r){pay+=calcSession(r).total;});
-  document.getElementById('mini-summary').innerHTML=
-    '<div class="sum-card"><div class="sum-num">'+recs.length+'</div><div class="sum-label">出場次數</div></div>'+
-    '<div class="sum-card highlight"><div class="sum-num">$'+pay.toLocaleString()+'</div><div class="sum-label">本月薪資</div></div>';
-}
-function addRecord() {
-  var date=document.getElementById('f-date').value, s=document.getElementById('f-start').value, e=document.getElementById('f-end').value;
-  var gl=parseInt(document.getElementById('f-glow').value)||0, lk=parseInt(document.getElementById('f-lock').value)||0, bk=parseInt(document.getElementById('f-booking').value)||0;
-  if (!date||!s||!e){showMsg('請填寫日期與時間');return;}
-  records.unshift({id:Date.now(),date:date,start:s,end:e,glow:gl,lock:lk,booking:bk});
-  save(); showMsg('已儲存！');
-  ['f-glow','f-lock','f-booking'].forEach(function(id){document.getElementById(id).value='';});
-  updatePreview();
-  var ym=date.slice(0,7), sel=document.getElementById('sel-month');
-  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===ym){sel.selectedIndex=i;break;}}
-  renderSummary();
-}
-function showMsg(m) { var el=document.getElementById('msg'); el.textContent=m; setTimeout(function(){el.textContent='';},2000); }
-function renderHistory() {
-  var ym=document.getElementById('sel-month2').value;
-  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), el=document.getElementById('records-list');
-  if(!recs.length){el.innerHTML='<div class="empty">本月尚無記錄</div>';return;}
-  el.innerHTML=recs.map(function(r){
-    var c=calcSession(r), chips=[c.hours.toFixed(1)+' 小時'];
-    if(r.glow) chips.push('螢光棒 ×'+r.glow);
-    if(r.lock) chips.push('鎖台 ×'+r.lock);
-    if(r.booking) chips.push('訂位 $'+r.booking.toLocaleString());
-    return '<div class="rec-item"><div class="rec-top"><div class="rec-date">'+r.date+' '+r.start+'–'+r.end+'</div>'+
-      '<div style="display:flex;align-items:center;gap:10px;"><div class="rec-total">$'+c.total.toLocaleString()+'</div>'+
-      '<button class="btn-del" onclick="deleteRecord('+r.id+')">✕</button></div></div>'+
-      '<div class="rec-chips">'+chips.map(function(ch){return '<span class="chip">'+ch+'</span>';}).join('')+'</div></div>';
-  }).join('');
-}
-function deleteRecord(id) { records=records.filter(function(r){return r.id!==id;}); save(); renderHistory(); renderSummary(); }
-function clearMonth() {
-  var ym=document.getElementById('sel-month2').value;
-  if(!confirm('確定清除本月所有記錄？')) return;
-  records=records.filter(function(r){return r.date.slice(0,7)!==ym;}); save(); renderHistory(); renderSummary();
-}
-function renderStats() {
-  var ym=document.getElementById('sel-month3').value;
-  var recs=records.filter(function(r){return r.date.slice(0,7)===ym;}), tot={total:0,hourPay:0,glowPay:0,lockPay:0,bookingPay:0,hours:0,glow:0,lock:0};
-  recs.forEach(function(r){var c=calcSession(r);tot.total+=c.total;tot.hourPay+=c.hourPay;tot.glowPay+=c.glowPay;tot.lockPay+=c.lockPay;tot.bookingPay+=c.bookingPay;tot.hours+=c.hours;tot.glow+=(r.glow||0);tot.lock+=(r.lock||0);});
-  document.getElementById('st-total').textContent='$'+tot.total.toLocaleString();
-  document.getElementById('st-breakdown').innerHTML=[
-    {label:'出場次數',val:recs.length+' 次'},
-    {label:'總工時',val:tot.hours.toFixed(1)+' 小時'},
-    {label:'時薪收入（×$250）',val:'$'+tot.hourPay.toLocaleString()},
-    {label:'螢光棒 '+tot.glow+' 支（×$100）',val:'$'+tot.glowPay.toLocaleString()},
-    {label:'鎖台 '+tot.lock+' 次（×$600）',val:'$'+tot.lockPay.toLocaleString()},
-    {label:'訂位抽成',val:'$'+tot.bookingPay.toLocaleString()},
-  ].map(function(row){return '<div class="bk-row"><span class="bk-label">'+row.label+'</span><span class="bk-val">'+row.val+'</span></div>';}).join('');
-}
-
-renderUserList();
-document.getElementById('new-name').addEventListener('keydown',function(e){if(e.key==='Enter') createUser();});
+// touch swipe
+var _sx = 0;
+document.addEventListener('DOMContentLoaded', function() {
+  var wrap = document.getElementById('slider-wrap');
+  if (!wrap) return;
+  wrap.addEventListener('touchstart', function(e){ _sx = e.touches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend', function(e){
+    var diff = _sx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goSlide(diff > 0 ? 1 : 0);
+  });
+});
+window.addEventListener('resize', function(){ goSlide(_cur); });
 </script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script>
+
+<!-- MENU -->
+<div id="menu">
+  <section>
+    <div class="inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Menu</span>
+        <div class="section-title">酒 單 菜 單</div>
+      </div>
+
+      <!-- 主選單導覽列 -->
+      <div class="menu-main-nav fade-in">
+        <button class="menu-main-btn active-main" onclick="showMainMenu('drinks')">🍸 酒水</button>
+        <span class="menu-main-sep">｜</span>
+        <button class="menu-main-btn" onclick="showMainMenu('food')">🍽 餐點</button>
+      </div>
+
+      <!-- 酒水子分類 -->
+      <div id="sub-drinks" class="menu-tabs">
+        <button class="menu-tab active" onclick="switchMenu('cocktail', this)">精典特調</button>
+        <button class="menu-tab" onclick="switchMenu('beer', this)">啤酒/洋酒</button>
+        <button class="menu-tab" onclick="switchMenu('soft', this)">無酒精飲料</button>
+      </div>
+
+      <!-- 餐點子分類 -->
+      <div id="sub-food" class="menu-tabs" style="display:none;">
+        <button class="menu-tab" onclick="switchMenu('food', this)">香煎菜單</button>
+        <button class="menu-tab" onclick="switchMenu('fry', this)">炸物</button>
+      </div>
+
+      <!-- 精典特調 -->
+      <div class="menu-section active" id="cocktail">
+        <div class="menu-category fade-in">
+          <div class="menu-cat-title">微 甜</div>
+          <div class="menu-items">
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">星霧（葡萄）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Starry Mist · Grape</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">藍焰（藍柑橘）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Blue Flame · Blue Curacao</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">晶霧（荔枝）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Crystal Mist · Lychee</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">心動（草莓）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Heartbeat · Strawberry</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">回憶（白柑橘）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Memories · White Curacao</small></span><span class="menu-item-price">$300</span></div>
+          </div>
+        </div>
+        <div class="menu-category fade-in">
+          <div class="menu-cat-title">有 酒 感</div>
+          <div class="menu-items">
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">威可<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Whisky Cola</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">野格炸彈<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Jäger Bomb</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">琴湯尼<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Gin &amp; Tonic</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">嗨蹦<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Highball</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">霧線<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Fogline</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">曙光<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Tequila Sunrise</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">青梅竹馬（偏酸）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Plum Sour</small></span><span class="menu-item-price">$300</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">伏特加萊姆<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Vodka Lime</small></span><span class="menu-item-price">$300</span></div>
+          </div>
+        </div>
+        <div class="menu-category fade-in">
+          <div class="menu-cat-title">酒 感 重</div>
+          <div class="menu-items">
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">威士忌酸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Whisky Sour</small></span><span class="menu-item-price">$350</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">餘燼<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Ember</small></span><span class="menu-item-price">$350</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">相遇<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Encounter</small></span><span class="menu-item-price">$350</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">長島度假<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Long Island Iced Tea</small></span><span class="menu-item-price">$350</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓特調<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">House Special</small></span><span class="menu-item-price">$400</span></div>
+            <div class="menu-item"><span class="menu-item-name">Shot 1杯 / 6杯 / 12杯</span><span class="menu-item-price">$100 / $500 / $1,000</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">VIP Shot<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Premium VIP Shot</small></span><span class="menu-item-price">$3,000</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 啤酒/洋酒 -->
+      <div class="menu-section" id="beer">
+        <div class="menu-category fade-in">
+          <div class="menu-cat-title">啤 酒</div>
+          <div class="menu-items">
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">金尊啤酒<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Kingstar Beer</small></span><span class="menu-item-price">$250 / 瓶 &nbsp;·&nbsp; $1,300 / 手</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">百威 / 大瓶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Budweiser Large</small></span><span class="menu-item-price">$250 / 瓶 &nbsp;·&nbsp; $1,300 / 手</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">百威 / 小瓶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Budweiser Small</small></span><span class="menu-item-price">$130 / 瓶 &nbsp;·&nbsp; $750 / 手</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">小海尼根<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Heineken</small></span><span class="menu-item-price">$140 / 瓶 &nbsp;·&nbsp; $800 / 手</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">雪山啤酒<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Snow Beer</small></span><span class="menu-item-price">$200 / 瓶 &nbsp;·&nbsp; $1,000 / 手</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">ASAHI（朝日零糖質）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Asahi Zero Sugar</small></span><span class="menu-item-price">$250 / 瓶 &nbsp;·&nbsp; $1,200 / 手</span></div>
+          </div>
+        </div>
+        <div class="menu-category fade-in">
+          <div class="menu-cat-title">經 典 洋 酒</div>
+          <div class="menu-items">
+            <div class="menu-item"><span class="menu-item-name">XR</span><span class="menu-item-price">$380 / 杯 &nbsp;·&nbsp; $4,600 / 瓶</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">大摩 12 年<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Dalmore 12Y Single Malt</small></span><span class="menu-item-price">$320 / 杯 &nbsp;·&nbsp; $3,800 / 瓶</span></div>
+            <div class="menu-item"><span class="menu-item-name">VSOP</span><span class="menu-item-price">$320 / 杯 &nbsp;·&nbsp; $3,700 / 瓶</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">格蘭利威 13 年<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Glenlivet 13Y Single Malt</small></span><span class="menu-item-price">$380 / 杯 &nbsp;·&nbsp; $3,800 / 瓶</span></div>
+            <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">百富<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Balvenie</small></span><span class="menu-item-price">$380 / 杯 &nbsp;·&nbsp; $3,800 / 瓶</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 無酒精 -->
+      <div class="menu-section" id="soft">
+        <div class="menu-items fade-in">
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">可口可樂<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Coca-Cola</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">雪碧<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Sprite</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">麥茶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Barley Tea</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">烏龍茶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Oolong Tea</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">無糖綠茶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Unsweetened Green Tea</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">可爾必思<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Calpis</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">柳橙汁<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Orange Juice</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">蔓越莓<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Cranberry Juice</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">奶茶<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Milk Tea</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">海洋離子水<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Ocean Electrolyte Water</small></span><span class="menu-item-price">$100</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">紅牛<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Red Bull</small></span><span class="menu-item-price">$100</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">飲料無限暢飲（杯）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Unlimited Soft Drink Refill</small></span><span class="menu-item-price">$300</span></div>
+        </div>
+      </div>
+
+      <!-- 下酒菜 -->
+      <div class="menu-section" id="food">
+        <div class="menu-cat-title" style="font-family:'Noto Serif TC',serif;font-size:0.9rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:0.5px solid rgba(201,168,76,0.3);">香 煎 菜 單</div>
+
+        <!-- ── 主廚推薦三張圖 ── 換成你的 GitHub raw URL -->
+        <div class="food-recommend fade-in">
+          <div class="food-rec-label">Chef's Selection · 主廚推薦</div>
+          <div class="food-rec-grid">
+
+            <!-- 推薦 1：把 FOOD1.jpg 換成你的實際檔名 -->
+            <div class="food-rec-card">
+              <div class="food-rec-img-wrap">
+                <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/lamb.jpg" alt="田園香羊排" class="food-rec-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="food-rec-placeholder">🍽</div>
+              </div>
+              <div class="food-rec-info">
+                <div class="food-rec-name">★ 田園香羊排</div>
+                <div class="food-rec-en">Herb Lamb Chop</div>
+                <div class="food-rec-price">$460</div>
+              </div>
+            </div>
+
+            <!-- 推薦 2：把 FOOD2.jpg 換成你的實際檔名 -->
+            <div class="food-rec-card">
+              <div class="food-rec-img-wrap">
+                <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/beef.jpg" alt="酒樓牛排" class="food-rec-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="food-rec-placeholder">🍽</div>
+              </div>
+              <div class="food-rec-info">
+                <div class="food-rec-name">★ 酒樓牛排</div>
+                <div class="food-rec-en">House Steak</div>
+                <div class="food-rec-price">$480</div>
+              </div>
+            </div>
+
+            <!-- 推薦 3：把 FOOD3.jpg 換成你的實際檔名 -->
+            <div class="food-rec-card">
+              <div class="food-rec-img-wrap">
+                <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/fish.jpg" alt="香煎鮭魚" class="food-rec-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="food-rec-placeholder">🍽</div>
+              </div>
+              <div class="food-rec-info">
+                <div class="food-rec-name">★ 香煎鮭魚</div>
+                <div class="food-rec-en">Pan-Fried Salmon</div>
+                <div class="food-rec-price">$360</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ── 推薦圖區結束 ── -->
+
+        <div class="menu-items fade-in">
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">家鄉味煎蛋<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Egg</small></span><span class="menu-item-price">$180</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓煎米腸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Rice Sausage</small></span><span class="menu-item-price">$180</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓煎羊腸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Lamb Sausage</small></span><span class="menu-item-price">$230</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">香煎香腸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Pork Sausage</small></span><span class="menu-item-price">$220</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">香煎虱目魚<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Milkfish</small></span><span class="menu-item-price">$250</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>香煎無骨雞腿排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Boneless Chicken Leg</small></span><span class="menu-item-price">$300</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">香煎鹹豬肉<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Salted Pork</small></span><span class="menu-item-price">$300</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">辣子雞丁<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Spicy Diced Chicken</small></span><span class="menu-item-price">$300</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓橙醬鴨胸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Orange Glazed Duck Breast</small></span><span class="menu-item-price">$360</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓米羊雙拼<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Rice Sausage &amp; Lamb Duo</small></span><span class="menu-item-price">$360</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">香煎鮭魚<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Salmon</small></span><span class="menu-item-price">$360</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>香煎松阪豬<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Pork Cheek</small></span><span class="menu-item-price">$400</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>田園香羊排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Herb Lamb Chop</small></span><span class="menu-item-price">$460</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>酒樓牛排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">House Steak</small></span><span class="menu-item-price">$480</span></div>
+        </div>
+      </div>
+
+      <!-- 炸物 -->
+      <div class="menu-section" id="fry">
+        <div class="menu-items fade-in">
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">薯條<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">French Fries</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">雞塊<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Chicken Nuggets</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">熱狗<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Hot Dog</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">小雞球<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Chicken Bites</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">玉米布丁酥<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Corn Pudding Crisp</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">洋蔥圈<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Onion Rings</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">小肉豆<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Mini Meat Bites</small></span><span class="menu-item-price">$120</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">鹽酥雞<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Taiwanese Popcorn Chicken</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">韓式炸雞翅<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Korean Fried Chicken Wings</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">辣味雞排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Spicy Chicken Cutlet</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">德士帶骨香腸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Bone-In Smoked Sausage</small></span><span class="menu-item-price">$200</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">炸物拼盤（熱狗／薯條／雞塊／雞球）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Fried Platter</small></span><span class="menu-item-price">$400</span></div>
+          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒肉拼盤（雞翅／雞塊／鹽酥雞／辣味雞排）<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Bar Meat Platter</small></span><span class="menu-item-price">$480</span></div>
+        </div>
+      </div>
+
+      <!-- 返回主選單 -->
+      <div style="text-align:center;margin-top:2.5rem;padding-top:2rem;border-top:0.5px solid rgba(201,168,76,0.15);">
+        <a href="#menu" onclick="setTimeout(function(){showMainMenu('drinks');switchMenu('cocktail', document.querySelector('.menu-tab'));},300);"
+           style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.7rem 2rem;border:1px solid var(--gold-dim);color:var(--gold-dim);text-decoration:none;font-size:0.78rem;letter-spacing:0.2em;font-family:'Noto Sans TC',sans-serif;transition:all 0.3s;"
+           onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)';this.style.background='rgba(201,168,76,0.07)';"
+           onmouseout="this.style.color='var(--gold-dim)';this.style.borderColor='var(--gold-dim)';this.style.background='transparent';">
+          ↑ 返回主選單
+        </a>
+      </div>
+
+      </div>
+  </section>
+</div>
+
+<!-- GIRLS -->
+<div id="girls" style="background:var(--dark);padding:6rem 2rem;">
+  <section style="max-width:1000px;margin:0 auto;padding:0;">
+
+    <div class="section-header fade-in" style="text-align:center;margin-bottom:3rem;">
+      <span class="section-label">Our Team</span>
+      <div class="section-title">遞 酒 樓 公 關</div>
+      <div style="margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;">
+        <span style="font-size:0.75rem;letter-spacing:0.12em;color:var(--gold-dim);font-family:'Noto Sans TC',sans-serif;">🔒 鎖台費 $600 ／ 半小時</span>
+        <span style="font-size:0.75rem;letter-spacing:0.12em;color:var(--gold-dim);font-family:'Noto Sans TC',sans-serif;">🪄 螢光棒小費 $200 ／ 隻</span>
+      </div>
+    </div>
+
+    <div class="fade-in" style="position:relative;">
+      <!-- 左箭頭 -->
+      <button id="gprev" onclick="goGirlsPage(_gp-1)" style="position:absolute;left:-2rem;top:50%;transform:translateY(-50%);background:rgba(10,8,6,0.9);border:1px solid var(--gold-dim);color:var(--gold);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.4rem;z-index:10;display:none;align-items:center;justify-content:center;transition:all 0.3s;padding:0;">‹</button>
+      <!-- 右箭頭 -->
+      <button id="gnext" onclick="goGirlsPage(_gp+1)" style="position:absolute;right:-2rem;top:50%;transform:translateY(-50%);background:rgba(10,8,6,0.9);border:1px solid var(--gold);color:var(--gold);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.4rem;z-index:10;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(201,168,76,0.4);transition:all 0.3s;padding:0;">›</button>
+
+      <!-- slider wrapper -->
+      <div id="gslider-wrap" style="overflow:hidden;">
+        <div id="gslider-track" style="display:flex;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);">
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/33.jpg" alt="33" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">33</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/BB.jpg" alt="貝貝" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">貝貝</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/HH.jpg" alt="涵涵" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">涵涵</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/UM.jpg" alt="玉米" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">玉米</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/++.jpg" alt="佳佳" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">佳佳</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/U.jpg" alt="小U" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小U</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/TING.jpg" alt="小婷" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小婷</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/UMAO.jpg" alt="羽毛" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">羽毛</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/IVY.jpg" alt="艾薇" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">艾薇</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/LIU.jpg" alt="小劉" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小劉</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/RR.jpg" alt="小柔" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小柔</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/TASICI.jpg" alt="採鮮" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">採鮮</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/LAILAI.jpg" alt="蕾蕾" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">蕾蕾</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/CB.jpg" alt="小啵" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小啵</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/kun.jpg" alt="小睏" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小睏</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/WINDA.jpg" alt="汪達" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">汪達</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/CHCH.jpg" alt="江江" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">江江</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/SL.jpg" alt="雪莉" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">雪莉</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/MH.jpg" alt="米花" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">米花</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/NONO.jpg" alt="諾諾" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">諾諾</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/RUBY.jpg" alt="Ruby" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">Ruby</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/SH.jpg" alt="Bee勳盡" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">Bee勳盡<br><small style="font-size:0.68rem;color:var(--gold-dim);letter-spacing:0.05em;">吉祥物</small></div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/YOYOY.jpg" alt="又又" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">又又</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/KILY.jpg" alt="凱莉" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">凱莉</div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/--.jpg" alt="減減" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">減減</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/CI.jpg" alt="小愛" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">小愛</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/HC.jpg" alt="番薯" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">番薯</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/711.jpg" alt="711" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">711<br><small style="font-size:0.68rem;color:var(--gold-dim);letter-spacing:0.05em;">調酒師</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/SK.jpg" alt="香港" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">香港</div>
+          </div>
+        </div>
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/LT.jpg" alt="老唐" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">老唐</div>
+          </div>
+        </div>
+         <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/LS.jpg" alt="羅莎" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">羅莎</div>
+           </div>
+        </div>
+         <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/RZ.jpg" alt="阿澤" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">阿澤<br><small style="font-size:0.68rem;color:var(--gold-dim);letter-spacing:0.05em;">黑白醉大廚</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="gslide-page">
+        <div class="girl-card fade-in">
+          <div class="girl-photo">
+            <img src="https://raw.githubusercontent.com/snn333cc/dijiulou-images1/main/HHH.jpg" alt="歡歡" loading="lazy">
+          </div>
+          <div class="girl-info">
+            <div class="girl-name">歡歡</div>
+          </div>
+        </div>
+        <div class="girl-card" style="visibility:hidden;"></div>
+        <div class="girl-card" style="visibility:hidden;"></div>
+        <div class="girl-card" style="visibility:hidden;"></div>
+      </div>
+      </div>
+      </div>
+
+      <!-- 頁碼點 -->
+      <div style="display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:1.8rem;">
+        <div class="gdot" onclick="goGirlsPage(0)" style="background:var(--gold);width:24px;box-shadow:0 0 6px var(--gold);"></div><div class="gdot" onclick="goGirlsPage(1)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(2)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(3)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(4)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(5)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(6)" style="background:var(--gold-dim);width:12px;"></div><div class="gdot" onclick="goGirlsPage(7)" style="background:var(--gold-dim);width:12px;"></div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<style>
+/* ── GIRL CARD ── */
+.girl-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--dark3);
+  border: 1px solid rgba(201,168,76,0.2);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+  cursor: default;
+}
+.girl-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.15);
+}
+.girl-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--dark4);
+  position: relative;
+}
+.girl-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.girl-card:hover .girl-photo img {
+  transform: scale(1.05);
+}
+.girl-info {
+  padding: 0.8rem 0.7rem 0.9rem;
+  text-align: center;
+  background: linear-gradient(to bottom, var(--dark3), var(--dark4));
+  border-top: 0.5px solid rgba(201,168,76,0.15);
+}
+.girl-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1rem;
+  color: var(--cream);
+  letter-spacing: 0.15em;
+  line-height: 1.6;
+}
+.girl-tag {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0.15rem 0.6rem;
+  border: 0.5px solid var(--gold-dim);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-dim);
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.girl-tag:hover {
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.gslide-page {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .gslide-page { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+.gdot {
+  height: 2px;
+  border-radius: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+</style>
+
+<script>
+var _gp = 0;
+var _gtotal = 8;
+
+function goGirlsPage(n) {
+  if (n < 0 || n >= _gtotal) return;
+  _gp = n;
+  var wrap = document.getElementById('gslider-wrap');
+  var track = document.getElementById('gslider-track');
+  track.style.transform = 'translateX(-' + (_gp * wrap.offsetWidth) + 'px)';
+  document.getElementById('gprev').style.display = _gp > 0 ? 'flex' : 'none';
+  document.getElementById('gnext').style.display = _gp < _gtotal - 1 ? 'flex' : 'none';
+  document.querySelectorAll('.gdot').forEach(function(d, i) {
+    var active = i === _gp;
+    d.style.background = active ? 'var(--gold)' : 'var(--gold-dim)';
+    d.style.width = active ? '24px' : '12px';
+    d.style.boxShadow = active ? '0 0 6px var(--gold)' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // set each page width = wrapper width
+  var wrap = document.getElementById('gslider-wrap');
+  var pages = document.querySelectorAll('.gslide-page');
+  pages.forEach(function(p) { p.style.minWidth = wrap.offsetWidth + 'px'; });
+
+  window.addEventListener('resize', function() {
+    pages.forEach(function(p) { p.style.minWidth = wrap.offsetWidth + 'px'; });
+    var track = document.getElementById('gslider-track');
+    track.style.transform = 'translateX(-' + (_gp * wrap.offsetWidth) + 'px)';
+  });
+
+  // touch swipe
+  var sx = 0;
+  wrap.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend', function(e){
+    var diff = sx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goGirlsPage(_gp + (diff > 0 ? 1 : -1));
+  });
+
+  goGirlsPage(0);
+});
+</script>
+
+<!-- EVENT -->
+<div id="event" style="background:var(--dark2);padding:6rem 2rem;">
+  <section style="max-width:860px;margin:0 auto;">
+    <div class="section-header fade-in" style="text-align:center;margin-bottom:3rem;">
+      <span class="section-label">Weekly Event</span>
+      <div class="section-title">每 週 活 動</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;" class="fade-in event-grid">
+
+      <!-- 每週三 -->
+      <div class="event-card" style="border:1px solid var(--gold-dim);padding:2.5rem 2rem;text-align:center;position:relative;background:rgba(201,168,76,0.03);">
+        <div style="position:absolute;top:-1px;left:-1px;width:24px;height:24px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);"></div>
+        <div style="position:absolute;bottom:-1px;right:-1px;width:24px;height:24px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);"></div>
+        <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.8rem;">Every Wednesday</div>
+        <div style="font-family:'Cinzel',serif;font-size:3rem;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,0.5);line-height:1;">WED</div><div style="font-family:'Noto Serif TC',serif;font-size:1rem;color:var(--gold);letter-spacing:0.4em;margin-bottom:0.8rem;">週 三</div>
+        <div style="font-family:'Noto Serif TC',serif;font-size:1.3rem;color:var(--cream);letter-spacing:0.2em;margin-bottom:1rem;">啤酒暢飲日</div>
+        <div style="width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1rem auto;box-shadow:0 0 6px var(--gold);"></div>
+        <div style="font-size:0.88rem;color:var(--cream-dim);line-height:2;letter-spacing:0.08em;">
+          小百威暢飲<br>
+          3 小時暢喝不限量
+        </div>
+        <div style="font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold-light);margin-top:1rem;text-shadow:0 0 16px rgba(201,168,76,0.5);">$800 / 人</div>
+      </div>
+
+      <!-- 每週六 ── 只需改這兩個變數 -->
+      <div class="event-card" style="border:1px solid var(--gold-dim);padding:2.5rem 2rem;text-align:center;position:relative;background:rgba(201,168,76,0.03);">
+        <div style="position:absolute;top:-1px;left:-1px;width:24px;height:24px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);"></div>
+        <div style="position:absolute;bottom:-1px;right:-1px;width:24px;height:24px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);"></div>
+        <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.8rem;">Every Saturday</div>
+        <div style="font-family:'Cinzel',serif;font-size:3rem;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,0.5);line-height:1;">SAT</div><div style="font-family:'Noto Serif TC',serif;font-size:1rem;color:var(--gold);letter-spacing:0.4em;margin-bottom:0.8rem;">週 六</div>
+        <!-- ★ 每週只需修改下面兩行 ★ -->
+        <div id="sat-date" style="font-size:0.8rem;letter-spacing:0.15em;color:var(--gold-dim);margin-bottom:0.5rem;">4 / 25</div>
+        <div id="sat-event" style="font-family:'Noto Serif TC',serif;font-size:1.3rem;color:var(--cream);letter-spacing:0.2em;margin-bottom:1rem;">辣妹舞團</div>
+        <!-- ★★★★★★★★★★★★★★ -->
+        <div style="width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1rem auto;box-shadow:0 0 6px var(--gold);"></div>
+        <div style="font-size:0.88rem;color:var(--cream-dim);line-height:2;letter-spacing:0.08em;">
+          特邀舞團登場<br>
+          精彩活動每週不同
+        </div>
+        <div style="margin-top:1rem;font-size:0.75rem;letter-spacing:0.1em;color:var(--gold-dim);">敬請期待</div>
+      </div>
+
+    </div>
+
+    <style>
+    @media (max-width:600px) {
+      .event-grid { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+      .event-card { padding: 1.8rem 1.2rem !important; }
+    }
+    
+/* ══════════════════════════════
+   MOBILE FIRST 全面優化
+══════════════════════════════ */
+
+/* 漢堡選單 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 999;
+  position: relative;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+  display: block;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+
+
+
+
+@media (max-width: 768px) {
+  /* Nav */
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+
+  /* Hero */
+  #hero { min-height: 100svh; }
+  .hero-logo-img { width: 82vw; max-width: 380px; height: auto; margin-bottom: 1.5rem; }
+  .hero-title { font-size: 2.8rem; letter-spacing: 0.12em; }
+  .hero-subtitle-cn { font-size: 1.6rem; letter-spacing: 0.4em; }
+  .hero-tagline { font-size: 0.75rem; }
+
+  /* Sections padding */
+  section { padding: 4rem 1.2rem; }
+
+  /* Section titles */
+  .section-title { font-size: 1.8rem; letter-spacing: 0.12em; }
+
+  /* About text */
+  .about-text { font-size: 1.05rem; line-height: 2.1; }
+
+  /* Event 格子 */
+  .event-card { padding: 2rem 1.5rem; }
+  .event-day { font-size: 2.5rem; }
+  .event-price { font-size: 1.5rem; }
+
+  /* Menu tabs - 手機版與電腦版一致 */
+  .menu-main-nav {
+    margin-bottom: 1.2rem;
+    gap: 0;
+    justify-content: center;
+  }
+  .menu-main-btn {
+    font-size: 0.82rem;
+    padding: 0.4rem 1.2rem;
+    letter-spacing: 0.12em;
+  }
+  .menu-main-sep {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(201,168,76,0.3);
+    font-size: 1rem;
+    padding: 0 0.2rem;
+  }
+  .menu-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    border: 1px solid var(--gold-dim) !important;
+    border-radius: 0 !important;
+    gap: 0 !important;
+    padding-bottom: 0 !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .menu-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    border: none !important;
+    border-right: 1px solid var(--gold-dim) !important;
+    border-radius: 0 !important;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.74rem !important;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .menu-tab:last-child { border-right: none !important; }
+
+  /* Menu items */
+  .menu-item { padding: 0.8rem 0; }
+  .menu-item-name { font-size: 0.95rem; }
+  .menu-item-price { font-size: 0.85rem; }
+
+  /* 公關網格 */
+  #girls-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+  .girl-name { font-size: 0.9rem; }
+  .girl-tag { font-size: 0.6rem; }
+
+  /* 分頁按鈕 */
+  .girl-filter { padding: 0.5rem 1rem !important; font-size: 0.72rem !important; letter-spacing: 0.1em !important; }
+
+  /* Contact */
+
+  /* Rules */
+  .rule-text { font-size: 0.92rem; }
+
+  /* Slider buttons */
+
+  /* Corner decorations - hide on mobile */
+  .corner { display: none; }
+}
+
+@media (max-width: 400px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-subtitle-cn { font-size: 1.3rem; }
+  #girls-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+</style>
+
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+  <section>
+    <div class="inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Find Us</span>
+        <div class="section-title">聯 絡 我 們</div>
+      </div>
+      <div class="contact-grid fade-in">
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div class="contact-label">地址</div>
+          <div class="contact-value">嘉義市忠義街 143 號</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <div class="contact-label">電話</div>
+          <div class="contact-value"><a href="tel:0930718886">0930 718 886</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">🕘</div>
+          <div class="contact-label">營業時間</div>
+          <div class="contact-value">每日 21:00 — 05:00</div>
+        </div>
+      </div>
+
+      <div class="social-row fade-in">
+        <a class="social-btn" href="https://www.instagram.com/9th_bar/" target="_blank">IG</a>
+        <a class="social-btn" href="https://www.facebook.com/p/%E9%81%9E%E9%85%92%E6%A8%93-100094227287129/" target="_blank">FB</a>
+        <a class="social-btn" href="https://line.me/R/ti/p/@706ptcce" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE
+        </a>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <a href="https://www.google.com/maps/search/?api=1&query=嘉義市忠義街143號" target="_blank" class="social-btn" style="display:inline-flex;align-items:center;gap:0.6rem;font-family:'Noto Sans TC',sans-serif;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Google 導航前往遞酒樓
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 遞酒樓 DI JIU LOU · 嘉義第一家 Talking Bar · 未滿 18 歲請勿飲酒
+</footer>
+
+<script>
+function switchMenu(id, btn) {
+  document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+var _menuOpen = false;
+function toggleMenu() {
+  var menu = document.getElementById('fabMenu');
+  var btn  = document.getElementById('fab-btn');
+  var lines = btn.querySelectorAll('.fab-line');
+  _menuOpen = !_menuOpen;
+  if (_menuOpen) {
+    menu.style.maxHeight = '320px';
+    menu.style.opacity = '1';
+    lines[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+    lines[1].style.opacity = '0';
+    lines[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    btn.style.boxShadow = '0 0 30px rgba(201,168,76,0.6)';
+  } else {
+    closeMenu();
+  }
+}
+function closeMenu() {
+  var menu = document.getElementById('fabMenu');
+  var btn  = document.getElementById('fab-btn');
+  var lines = btn.querySelectorAll('.fab-line');
+  _menuOpen = false;
+  menu.style.maxHeight = '0';
+  menu.style.opacity = '0';
+  lines[0].style.transform = 'none';
+  lines[1].style.opacity = '1';
+  lines[2].style.transform = 'none';
+  btn.style.boxShadow = '0 0 20px rgba(201,168,76,0.3)';
+}
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('fabMenu');
+  var btn  = document.getElementById('fab-btn');
+  if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+    closeMenu();
+  }
+});
+</script>
+
+<!-- 浮動漢堡選單 -->
+<div id="fab-btn" onclick="toggleMenu()" style="
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  width: 52px;
+  height: 52px;
+  background: rgba(10,8,6,0.92);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 0 20px rgba(201,168,76,0.3);
+  transition: box-shadow 0.3s;
+">
+  <span class="fab-line" style="width:20px;height:1.5px;background:var(--gold);display:block;transition:all 0.35s;transform-origin:center;"></span>
+  <span class="fab-line" style="width:20px;height:1.5px;background:var(--gold);display:block;transition:all 0.35s;"></span>
+  <span class="fab-line" style="width:20px;height:1.5px;background:var(--gold);display:block;transition:all 0.35s;transform-origin:center;"></span>
+</div>
+
+<!-- 浮動選單面板 -->
+<div id="fabMenu" style="
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  width: 160px;
+  background: rgba(10,8,6,0.96);
+  border: 1px solid rgba(201,168,76,0.3);
+  z-index: 998;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  border-radius: 2px;
+">
+  <a href="#about"   onclick="closeMenu()" class="fab-link">關 於</a>
+  <a href="#menu"    onclick="closeMenu()" class="fab-link">酒 單</a>
+  <a href="#girls"   onclick="closeMenu()" class="fab-link">公 關</a>
+  <a href="#event"   onclick="closeMenu()" class="fab-link">活 動</a>
+  <a href="#contact" onclick="closeMenu()" class="fab-link" style="border-bottom:none;">聯 絡</a>
+</div>
+
+<style>
+.fab-link {
+  display: block;
+  padding: 0.9rem 1.3rem;
+  color: var(--cream-dim);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  border-bottom: 0.5px solid rgba(201,168,76,0.1);
+  transition: color 0.2s, background 0.2s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.fab-link:hover {
+  color: var(--gold);
+  background: rgba(201,168,76,0.07);
+}
+#fab-btn:hover {
+  box-shadow: 0 0 30px rgba(201,168,76,0.5);
+}
+</style>
+
+<script>
+/* 只擋水平漂移，保留上下滑 + 雙指放大縮小 */
+(function(){
+  var startX, startY;
+  document.addEventListener('touchstart', function(e){
+    if(e.touches.length > 1) return; // 多指不處理（允許 pinch zoom）
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e){
+    if(e.touches.length > 1) return; // 雙指放大縮小完全放行
+    if(startX == null) return;
+    var dx = Math.abs(e.touches[0].clientX - startX);
+    var dy = Math.abs(e.touches[0].clientY - startY);
+    if(dx > dy && dx > 10){
+      var el = e.target;
+      while(el && el !== document.body){
+        var style = window.getComputedStyle(el);
+        if(style.overflowX === 'auto' || style.overflowX === 'scroll') return;
+        el = el.parentElement;
+      }
+      e.preventDefault(); // 只擋單指水平漂移
+    }
+  }, {passive: false});
+})();
+</script>
+
+<style>
+/* ── 香煎菜單主廚推薦圖 ── */
+.food-recommend {
+  margin-bottom: 2.5rem;
+}
+
+.food-rec-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.food-rec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.food-rec-card {
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.03);
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.food-rec-card:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.07);
+}
+
+.food-rec-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgba(201,168,76,0.05);
+}
+
+.food-rec-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.food-rec-card:hover .food-rec-img {
+  transform: scale(1.05);
+}
+
+.food-rec-placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--gold-dim);
+  background: rgba(201,168,76,0.05);
+}
+
+.food-rec-info {
+  padding: 0.8rem 0.9rem 1rem;
+  text-align: center;
+}
+
+.food-rec-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.88rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.food-rec-en {
+  font-size: 0.65rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.food-rec-price {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .food-rec-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  .food-rec-info { padding: 0.6rem 0.5rem 0.8rem; }
+  .food-rec-name { font-size: 0.78rem; }
+  .food-rec-en { font-size: 0.6rem; }
+  .food-rec-price { font-size: 0.8rem; }
+}
+
+/* 主選單導覽 */
+.menu-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.menu-main-btn {
+  background: transparent;
+  border: none;
+  color: var(--cream-dim);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  transition: color 0.3s;
+  position: relative;
+}
+.menu-main-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 1px;
+  background: var(--gold);
+  transition: left 0.3s, right 0.3s;
+}
+.menu-main-btn.active-main {
+  color: var(--gold);
+}
+.menu-main-btn.active-main::after {
+  left: 0; right: 0;
+  box-shadow: 0 0 6px var(--gold);
+}
+.menu-main-sep {
+  color: rgba(201,168,76,0.3);
+  font-size: 1rem;
+}
+</style>
+<script>
+function showMainMenu(type) {
+  var drinksTab = document.getElementById('sub-drinks');
+  var foodTab = document.getElementById('sub-food');
+  var btns = document.querySelectorAll('.menu-main-btn');
+  if(type === 'drinks') {
+    drinksTab.setAttribute('style', 'display:flex;');
+    foodTab.setAttribute('style', 'display:none;');
+    btns[0].classList.add('active-main');
+    btns[1].classList.remove('active-main');
+    var firstDrink = drinksTab.querySelectorAll('.menu-tab')[0];
+    switchMenu('cocktail', firstDrink);
+  } else {
+    drinksTab.setAttribute('style', 'display:none;');
+    foodTab.setAttribute('style', 'display:flex;');
+    btns[0].classList.remove('active-main');
+    btns[1].classList.add('active-main');
+    var firstFood = foodTab.querySelectorAll('.menu-tab')[0];
+    switchMenu('food', firstFood);
+  }
+}
+</script>
 </body>
 </html>
