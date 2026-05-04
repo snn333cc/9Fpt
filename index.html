@@ -654,9 +654,27 @@ footer {
   .event-day { font-size: 2.5rem; }
   .event-price { font-size: 1.5rem; }
 
-  /* Menu tabs - 單層 5 個 tab 可橫滑 */
+  /* Menu tabs - 手機版與電腦版一致 */
+  .menu-main-nav {
+    margin-bottom: 1.2rem;
+    gap: 0;
+    justify-content: center;
+  }
+  .menu-main-btn {
+    font-size: 0.82rem;
+    padding: 0.4rem 1.2rem;
+    letter-spacing: 0.12em;
+  }
+  .menu-main-sep {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(201,168,76,0.3);
+    font-size: 1rem;
+    padding: 0 0.2rem;
+  }
   .menu-tabs {
     display: flex !important;
+    justify-content: center !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     width: 100% !important;
@@ -669,13 +687,13 @@ footer {
   }
   .menu-tabs::-webkit-scrollbar { display: none; }
   .menu-tab {
-    flex: 0 0 auto;
-    min-width: max-content;
+    flex: 1 1 0;
+    min-width: 0;
     border: none !important;
     border-right: 1px solid var(--gold-dim) !important;
     border-radius: 0 !important;
-    padding: 0.65rem 1rem !important;
-    font-size: 0.75rem !important;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.74rem !important;
     text-align: center;
     white-space: nowrap;
   }
@@ -898,11 +916,22 @@ window.addEventListener('resize', function(){ goSlide(_cur); });
         <div class="section-title">酒 單 菜 單</div>
       </div>
 
-      <!-- 單層 tab 選單 -->
-      <div class="menu-tabs fade-in" id="menu-tabs-single">
+      <!-- 主選單導覽列 -->
+      <div class="menu-main-nav fade-in">
+        <button class="menu-main-btn active-main" onclick="showMainMenu('drinks')">🍸 酒水</button>
+        <span class="menu-main-sep">｜</span>
+        <button class="menu-main-btn" onclick="showMainMenu('food')">🍽 餐點</button>
+      </div>
+
+      <!-- 酒水子分類 -->
+      <div id="sub-drinks" class="menu-tabs">
         <button class="menu-tab active" onclick="switchMenu('cocktail', this)">精典特調</button>
-        <button class="menu-tab" onclick="switchMenu('beer', this)">啤酒／洋酒</button>
+        <button class="menu-tab" onclick="switchMenu('beer', this)">啤酒/洋酒</button>
         <button class="menu-tab" onclick="switchMenu('soft', this)">無酒精飲料</button>
+      </div>
+
+      <!-- 餐點子分類 -->
+      <div id="sub-food" class="menu-tabs" style="display:none;">
         <button class="menu-tab" onclick="switchMenu('food', this)">香煎菜單</button>
         <button class="menu-tab" onclick="switchMenu('fry', this)">炸物</button>
       </div>
@@ -1052,10 +1081,7 @@ window.addEventListener('resize', function(){ goSlide(_cur); });
           <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">辣子雞丁<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Spicy Diced Chicken</small></span><span class="menu-item-price">$300</span></div>
           <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓橙醬鴨胸<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Orange Glazed Duck Breast</small></span><span class="menu-item-price">$360</span></div>
           <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">酒樓米羊雙拼<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Rice Sausage &amp; Lamb Duo</small></span><span class="menu-item-price">$360</span></div>
-          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;">香煎鮭魚<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Salmon</small></span><span class="menu-item-price">$360</span></div>
           <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>香煎松阪豬<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Pan-Fried Pork Cheek</small></span><span class="menu-item-price">$400</span></div>
-          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>田園香羊排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">Herb Lamb Chop</small></span><span class="menu-item-price">$460</span></div>
-          <div class="menu-item"><span class="menu-item-name" style="line-height:1.6;"><span style="color:var(--gold);font-size:0.85rem;margin-right:0.3rem;">★</span>酒樓牛排<br><small style="color:var(--gold-dim);font-size:0.72rem;letter-spacing:0.05em;">House Steak</small></span><span class="menu-item-price">$480</span></div>
         </div>
       </div>
 
@@ -1572,12 +1598,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.8rem;">Every Saturday</div>
         <div style="font-family:'Cinzel',serif;font-size:3rem;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,0.5);line-height:1;">SAT</div><div style="font-family:'Noto Serif TC',serif;font-size:1rem;color:var(--gold);letter-spacing:0.4em;margin-bottom:0.8rem;">週 六</div>
         <!-- ★ 每週只需修改下面兩行 ★ -->
-        <div id="sat-date" style="font-size:0.8rem;letter-spacing:0.15em;color:var(--gold-dim);margin-bottom:0.5rem;">5 / 09</div>
-        <div id="sat-event" style="font-family:'Noto Serif TC',serif;font-size:1.3rem;color:var(--cream);letter-spacing:0.2em;margin-bottom:1rem;">螢光動物派對</div>
+        <div id="sat-date" style="font-size:0.8rem;letter-spacing:0.15em;color:var(--gold-dim);margin-bottom:0.5rem;">4 / 25</div>
+        <div id="sat-event" style="font-family:'Noto Serif TC',serif;font-size:1.3rem;color:var(--cream);letter-spacing:0.2em;margin-bottom:1rem;">辣妹舞團</div>
         <!-- ★★★★★★★★★★★★★★ -->
         <div style="width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1rem auto;box-shadow:0 0 6px var(--gold);"></div>
         <div style="font-size:0.88rem;color:var(--cream-dim);line-height:2;letter-spacing:0.08em;">
-          公關動物裝扮登場<br>
+          特邀舞團登場<br>
           精彩活動每週不同
         </div>
         <div style="margin-top:1rem;font-size:0.75rem;letter-spacing:0.1em;color:var(--gold-dim);">敬請期待</div>
@@ -1648,9 +1674,27 @@ document.addEventListener('DOMContentLoaded', function() {
   .event-day { font-size: 2.5rem; }
   .event-price { font-size: 1.5rem; }
 
-  /* Menu tabs - 單層 5 個 tab 可橫滑 */
+  /* Menu tabs - 手機版與電腦版一致 */
+  .menu-main-nav {
+    margin-bottom: 1.2rem;
+    gap: 0;
+    justify-content: center;
+  }
+  .menu-main-btn {
+    font-size: 0.82rem;
+    padding: 0.4rem 1.2rem;
+    letter-spacing: 0.12em;
+  }
+  .menu-main-sep {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(201,168,76,0.3);
+    font-size: 1rem;
+    padding: 0 0.2rem;
+  }
   .menu-tabs {
     display: flex !important;
+    justify-content: center !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     width: 100% !important;
@@ -1663,13 +1707,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   .menu-tabs::-webkit-scrollbar { display: none; }
   .menu-tab {
-    flex: 0 0 auto;
-    min-width: max-content;
+    flex: 1 1 0;
+    min-width: 0;
     border: none !important;
     border-right: 1px solid var(--gold-dim) !important;
     border-radius: 0 !important;
-    padding: 0.65rem 1rem !important;
-    font-size: 0.75rem !important;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.74rem !important;
     text-align: center;
     white-space: nowrap;
   }
@@ -2012,6 +2056,67 @@ document.addEventListener('click', function(e) {
   .food-rec-price { font-size: 0.8rem; }
 }
 
-
+/* 主選單導覽 */
+.menu-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.menu-main-btn {
+  background: transparent;
+  border: none;
+  color: var(--cream-dim);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  transition: color 0.3s;
+  position: relative;
+}
+.menu-main-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 1px;
+  background: var(--gold);
+  transition: left 0.3s, right 0.3s;
+}
+.menu-main-btn.active-main {
+  color: var(--gold);
+}
+.menu-main-btn.active-main::after {
+  left: 0; right: 0;
+  box-shadow: 0 0 6px var(--gold);
+}
+.menu-main-sep {
+  color: rgba(201,168,76,0.3);
+  font-size: 1rem;
+}
+</style>
+<script>
+function showMainMenu(type) {
+  var drinksTab = document.getElementById('sub-drinks');
+  var foodTab = document.getElementById('sub-food');
+  var btns = document.querySelectorAll('.menu-main-btn');
+  if(type === 'drinks') {
+    drinksTab.setAttribute('style', 'display:flex;');
+    foodTab.setAttribute('style', 'display:none;');
+    btns[0].classList.add('active-main');
+    btns[1].classList.remove('active-main');
+    var firstDrink = drinksTab.querySelectorAll('.menu-tab')[0];
+    switchMenu('cocktail', firstDrink);
+  } else {
+    drinksTab.setAttribute('style', 'display:none;');
+    foodTab.setAttribute('style', 'display:flex;');
+    btns[0].classList.remove('active-main');
+    btns[1].classList.add('active-main');
+    var firstFood = foodTab.querySelectorAll('.menu-tab')[0];
+    switchMenu('food', firstFood);
+  }
+}
+</script>
 </body>
 </html>
