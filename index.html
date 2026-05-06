@@ -359,7 +359,7 @@ function calcHours(s,e) {
 }
 function calcBooking(a) { return (!a||a<=0)?0:Math.floor(a/2400)*300; }
 function calcSession(r) {
-  var h=calcHours(r.start,r.end), hp=Math.round(h*250), gp=(r.glow||0)*100, lp=(r.lock||0)*600, bp=calcBooking(r.booking||0);
+  var h=calcHours(r.start,r.end), hp=Math.round(h*250), gp=(r.glow||0)*100, lp=(r.lock||0)*300, bp=calcBooking(r.booking||0);
   return {hours:h,hourPay:hp,glowPay:gp,lockPay:lp,bookingPay:bp,total:hp+gp+lp+bp};
 }
 function updatePreview() {
